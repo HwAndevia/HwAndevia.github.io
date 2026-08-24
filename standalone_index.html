@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HW-Andevia Repuestos - TVS & Bajaj Perú</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-orange-500 selection:text-slate-950">
+
+  <!-- NAVBAR REFORZADO -->
+  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-orange-500/20">
+          <i class="fa-solid fa-motorcycle"></i>
+        </div>
+        <div>
+          <span class="text-xl font-black text-white tracking-tight block leading-none">HW-Andevia <span class="text-orange-500">Perú</span></span>
+          <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Repuestos TVS & Bajaj</span>
+        </div>
+      </a>
+
+      <!-- Botones de Acción Nav -->
+      <div class="flex items-center gap-3">
+        <button onclick="abrirChatIA()" class="bg-orange-500 hover:bg-orange-400 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all active:scale-95">
+          <i class="fa-solid fa-robot"></i>
+          <span class="hidden sm:inline">Asistente IA</span>
+        </button>
+        <a href="https://wa.me/51980722382" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all active:scale-95">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNER PRINCIPAL HERO -->
+  <section class="bg-gradient-to-b from-slate-950 to-slate-900 py-10 px-4 border-b border-slate-800 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase px-3 py-1 rounded-full inline-block mb-3">
+        <i class="fa-solid fa-shield-halved mr-1"></i> Garantía OEM & Alternativa A1
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-3">
+        Repuestos Originales para Mototaxis <span class="text-orange-500">TVS King y Bajaj RE</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Catálogo actualizado en tiempo real. Selecciona entre calidad OEM Original o Alternativa probada en taller. Envíos inmediatos a todo el Perú.
+      </p>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE PRODUCTOS -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    <!-- FILTROS Y BÚSQUEDA -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+      <!-- Filtros por Marca -->
+      <div class="flex items-center gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800 w-full sm:w-auto">
+        <button onclick="filtrarMarca('TODOS')" id="btn-marca-TODOS" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-orange-500 text-slate-950">Todos</button>
+        <button onclick="filtrarMarca('TVS')" id="btn-marca-TVS" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white">TVS King</button>
+        <button onclick="filtrarMarca('Bajaj')" id="btn-marca-Bajaj" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white">Bajaj RE</button>
+      </div>
+
+      <!-- Buscador -->
+      <div class="relative w-full sm:w-80">
+        <input type="text" id="input-search" oninput="buscarProductos()" placeholder="Buscar cilindro, pistón, embrague..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-500 text-xs"></i>
+      </div>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div class="col-span-full text-center py-12 text-slate-500">
+        <i class="fa-solid fa-circle-notch fa-spin text-2xl text-orange-500 mb-2"></i>
+        <p>Cargando catálogo desde productos.json...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DE COMPRA RECUADRO GRANDE -->
+  <div id="modal-compra" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="bg-slate-950 p-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="font-bold text-white text-base flex items-center gap-2">
+          <i class="fa-solid fa-cart-shopping text-emerald-400"></i> Confirmar Pedido de Repuesto
+        </h3>
+        <button onclick="cerrarModalCompra()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-5 text-sm">
+        <!-- Info producto -->
+        <div class="flex gap-4 bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+          <img id="modal-img" src="" class="w-24 h-24 object-cover rounded-lg bg-slate-800">
+          <div>
+            <span id="modal-marca" class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-orange-500 text-slate-950 mb-1 inline-block"></span>
+            <h4 id="modal-nombre" class="font-bold text-white text-base leading-tight"></h4>
+            <p id="modal-compat" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+        </div>
+
+        <!-- Selección de Calidad -->
+        <div>
+          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">1. Selecciona la Calidad:</label>
+          <div class="grid grid-cols-2 gap-3">
+            <button id="opt-oem" onclick="seleccionarCalidadModal('OEM')" class="p-3 rounded-xl border-2 text-left border-amber-500 bg-amber-500/10">
+              <div class="font-bold text-amber-400 text-xs">OEM Original</div>
+              <div id="modal-precio-oem" class="text-base font-black text-white">S/ 0.00</div>
+            </button>
+
+            <button id="opt-alt" onclick="seleccionarCalidadModal('Alternativa')" class="p-3 rounded-xl border-2 text-left border-slate-800 bg-slate-950">
+              <div class="font-bold text-blue-400 text-xs">Alternativa A1</div>
+              <div id="modal-precio-alt" class="text-base font-black text-white">S/ 0.00</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-400 uppercase">2. Unidades:</label>
+          <div class="flex items-center gap-3">
+            <button onclick="cambiarCantidadModal(-1)" class="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold">-</button>
+            <span id="modal-cant" class="font-black text-amber-400 text-base">1</span>
+            <button onclick="cambiarCantidadModal(1)" class="w-8 h-8 rounded-lg bg-slate-800 text-white font-bold">+</button>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-slate-500 block uppercase font-mono">Total:</span>
+            <span id="modal-total" class="text-xl font-black text-emerald-400">S/ 0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-950 border-t border-slate-800">
+        <button onclick="enviarWhatsAppModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3.5 rounded-xl flex items-center justify-center gap-2 uppercase tracking-wide text-xs shadow-lg">
+          <i class="fa-brands fa-whatsapp text-base"></i> Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CHAT IA -->
+  <div id="modal-chat-ia" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[550px]">
+      <div class="bg-slate-950 p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-sm">HW Andevia IA Asistente 24/7</h3>
+            <p class="text-[10px] text-slate-400">Experto en repuestos TVS & Bajaj</p>
+          </div>
+        </div>
+        <button onclick="cerrarChatIA()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs bg-slate-950/50">
+        <div class="bg-slate-800 text-slate-200 p-3 rounded-xl max-w-[85%] border border-slate-700">
+          ¡Hola maestro! Soy HW Andevia IA. Escribe tu consulta sobre repuestos o compatibilidad de tu mototaxi.
+        </div>
+      </div>
+
+      <div class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
+        <input type="text" id="chat-input" placeholder="Ej: ¿Tiene pistón para TVS King 200?" class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
+        <button onclick="enviarMensajeIA()" class="bg-orange-500 hover:bg-orange-400 text-slate-950 font-black px-4 rounded-xl text-xs">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CONFIGURA AQUÍ LA URL DE TU WORKER EN CLOUDFLARE
+    const WORKER_URL = "https://HWAndevia-ia-worker.TU_USUARIO.workers.dev";
+    const NUMERO_WHATSAPP = "51980722382";
+
+    let todosLosProductos = [];
+    let productosFiltrados = [];
+    let productoSeleccionado = null;
+    let calidadSeleccionada = 'OEM';
+    let cantidadSeleccionada = 1;
+
+    // Cargar productos desde productos.json
+    async function cargarCatalogo() {
+      try {
+        const res = await fetch('productos.json');
+        todosLosProductos = await res.json();
+        productosFiltrados = [...todosLosProductos];
+        renderizarProductos();
+      } catch (e) {
+        document.getElementById('grid-productos').innerHTML = `
+          <div class="col-span-full text-center py-12 text-red-400">
+            Error al cargar productos.json. Asegúrate de ejecutar el servidor local.
+          </div>`;
+      }
+    }
+
+    function renderizarProductos() {
+      const grid = document.getElementById('grid-productos');
+      if (productosFiltrados.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500">No se encontraron repuestos.</div>';
+        return;
+      }
+
+      grid.innerHTML = productosFiltrados.map(p => `
+        <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-slate-700 transition-all">
+          <img src="${p.imageUrl}" class="w-full h-48 object-cover bg-slate-900" onerror="this.src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600'">
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">${p.brand}</span>
+              <h3 class="font-bold text-white text-sm mt-1 leading-snug">${p.name}</h3>
+              <p class="text-[11px] text-slate-400 mt-1">${p.modelCompatibility || 'TVS / Bajaj'}</p>
+            </div>
+            
+            <div class="pt-2 border-t border-slate-900 flex items-center justify-between">
+              <div>
+                <span class="text-[9px] text-slate-500 block uppercase">OEM Original</span>
+                <span class="text-base font-black text-amber-400">S/ ${p.priceOEM.toFixed(2)}</span>
+              </div>
+              <button onclick="abrirModalCompra('${p.id}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-3.5 py-2 rounded-xl shadow-md uppercase tracking-wider">
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filtrarMarca(marca) {
+      document.querySelectorAll('[id^="btn-marca-"]').forEach(btn => {
+        btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
+      });
+      document.getElementById(`btn-marca-${marca}`).className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-orange-500 text-slate-950";
+
+      if (marca === 'TODOS') productosFiltrados = [...todosLosProductos];
+      else productosFiltrados = todosLosProductos.filter(p => p.brand === marca);
+      renderizarProductos();
+    }
+
+    function buscarProductos() {
+      const q = document.getElementById('input-search').value.toLowerCase();
+      productosFiltrados = todosLosProductos.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+      renderizarProductos();
+    }
+
+    // Modal de Compra
+    function abrirModalCompra(id) {
+      productoSeleccionado = todosLosProductos.find(p => p.id === id);
+      if (!productoSeleccionado) return;
+      calidadSeleccionada = 'OEM';
+      cantidadSeleccionada = 1;
+
+      document.getElementById('modal-img').src = productoSeleccionado.imageUrl;
+      document.getElementById('modal-marca').innerText = productoSeleccionado.brand;
+      document.getElementById('modal-nombre').innerText = productoSeleccionado.name;
+      document.getElementById('modal-compat').innerText = "Compatibilidad: " + productoSeleccionado.modelCompatibility;
+      document.getElementById('modal-precio-oem').innerText = "S/ " + productoSeleccionado.priceOEM.toFixed(2);
+      document.getElementById('modal-precio-alt').innerText = "S/ " + productoSeleccionado.priceAlt.toFixed(2);
+
+      actualizarModalCalculos();
+      document.getElementById('modal-compra').classList.remove('hidden');
+      document.getElementById('modal-compra').classList.add('flex');
+    }
+
+    function seleccionarCalidadModal(cal) {
+      calidadSeleccionada = cal;
+      if (cal === 'OEM') {
+        document.getElementById('opt-oem').className = "p-3 rounded-xl border-2 text-left border-amber-500 bg-amber-500/10";
+        document.getElementById('opt-alt').className = "p-3 rounded-xl border-2 text-left border-slate-800 bg-slate-950";
+      } else {
+        document.getElementById('opt-alt').className = "p-3 rounded-xl border-2 text-left border-blue-500 bg-blue-500/10";
+        document.getElementById('opt-oem').className = "p-3 rounded-xl border-2 text-left border-slate-800 bg-slate-950";
+      }
+      actualizarModalCalculos();
+    }
+
+    function cambiarCantidadModal(delta) {
+      cantidadSeleccionada = Math.max(1, cantidadSeleccionada + delta);
+      actualizarModalCalculos();
+    }
+
+    function actualizarModalCalculos() {
+      const precio = calidadSeleccionada === 'OEM' ? productoSeleccionado.priceOEM : productoSeleccionado.priceAlt;
+      document.getElementById('modal-cant').innerText = cantidadSeleccionada;
+      document.getElementById('modal-total').innerText = "S/ " + (precio * cantidadSeleccionada).toFixed(2);
+    }
+
+    function cerrarModalCompra() {
+      document.getElementById('modal-compra').classList.add('hidden');
+      document.getElementById('modal-compra').classList.remove('flex');
+    }
+
+    function enviarWhatsAppModal() {
+      const precio = calidadSeleccionada === 'OEM' ? productoSeleccionado.priceOEM : productoSeleccionado.priceAlt;
+      const total = (precio * cantidadSeleccionada).toFixed(2);
+      const msg = `Hola Hw Andevia, deseo comprar ${cantidadSeleccionada} unidad(es) de "${productoSeleccionado.name}" (${calidadSeleccionada}) por un total de S/ ${total}. ¿Tienen envío disponible?`;
+      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+      cerrarModalCompra();
+    }
+
+    // Chat IA
+    function abrirChatIA() {
+      document.getElementById('modal-chat-ia').classList.remove('hidden');
+      document.getElementById('modal-chat-ia').classList.add('flex');
+    }
+
+    function cerrarChatIA() {
+      document.getElementById('modal-chat-ia').classList.add('hidden');
+      document.getElementById('modal-chat-ia').classList.remove('flex');
+    }
+
+    async function enviarMensajeIA() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages');
+      container.innerHTML += `<div class="bg-orange-500 text-slate-950 font-bold p-3 rounded-xl max-w-[85%] ml-auto">${text}</div>`;
+      input.value = '';
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: text })
+        });
+        const data = await res.json();
+        container.innerHTML += `<div class="bg-slate-800 text-slate-200 p-3 rounded-xl max-w-[85%] border border-slate-700">${data.text || data.error}</div>`;
+      } catch (e) {
+        container.innerHTML += `<div class="bg-red-500/20 text-red-300 p-3 rounded-xl max-w-[85%] border border-red-500/40">Error al conectar con la IA.</div>`;
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    cargarCatalogo();
+  </script>
+</body>
+</html>
