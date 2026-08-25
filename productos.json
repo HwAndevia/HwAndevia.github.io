@@ -64,5 +64,16 @@
     "stockAlt": 60,
     "imageUrl": "https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "Bajaj RE 205, RE 4S, Maxima Cargo"
+  },
+  {
+    "name": "Kawasaki",
+    "brand": "Universal",
+    "category": "Vehiculo",
+    "priceOEM": 7000.0,
+    "priceAlt": 5500.0,
+    "stockOEM": 12,
+    "stockAlt": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
+    "modelCompatibility": "TVS / Bajaj"
   }
 ]
