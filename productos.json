@@ -75,5 +75,16 @@
     "stockAlt": 4,
     "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "TVS / Bajaj"
+  },
+  {
+    "name": "67 Kawas",
+    "brand": "Universal Studios",
+    "category": "Cables de Acero",
+    "priceOEM": 677777.0,
+    "priceAlt": 76666.0,
+    "stockOEM": 6,
+    "stockAlt": 7,
+    "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
+    "modelCompatibility": "TVS 67"
   }
 ]
