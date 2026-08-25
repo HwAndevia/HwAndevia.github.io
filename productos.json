@@ -31,5 +31,27 @@
     "stockAlt": 5,
     "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "Bajaj RE 2T"
+  },
+  {
+    "name": "Filtro de gasolina",
+    "brand": "TVS",
+    "category": "Filtro",
+    "priceOEM": 1.5,
+    "priceAlt": 0.8,
+    "stockOEM": 60,
+    "stockAlt": 80,
+    "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
+    "modelCompatibility": "TVS King 200"
+  },
+  {
+    "name": "Acelerador",
+    "brand": "TVS",
+    "category": "Control",
+    "priceOEM": 25.0,
+    "priceAlt": 20.0,
+    "stockOEM": 15,
+    "stockAlt": 23,
+    "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
+    "modelCompatibility": "TVS King 200"
   }
 ]
