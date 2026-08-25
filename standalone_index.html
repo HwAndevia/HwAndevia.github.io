@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HW-Andevia Repuestos - TVS & Bajaj Perú</title>
+  <title>HW-Andevia - TVS & Bajaj Perú</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -36,7 +36,7 @@
           <i class="fa-solid fa-robot"></i>
           <span class="hidden sm:inline">Asistente IA</span>
         </button>
-        <a href="https://wa.me/51980722382" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all active:scale-95">
+        <a href="https://wa.me/51987654321" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all active:scale-95">
           <i class="fa-brands fa-whatsapp text-sm"></i>
           <span class="hidden sm:inline">WhatsApp</span>
         </a>
@@ -182,7 +182,7 @@
   <script>
     // CONFIGURA AQUÍ LA URL DE TU WORKER EN CLOUDFLARE
     const WORKER_URL = "https://HWAndevia-ia-worker.TU_USUARIO.workers.dev";
-    const NUMERO_WHATSAPP = "51980722382";
+    const NUMERO_WHATSAPP = "51987654321";
 
     let todosLosProductos = [];
     let productosFiltrados = [];
@@ -194,7 +194,11 @@
     async function cargarCatalogo() {
       try {
         const res = await fetch('productos.json');
-        todosLosProductos = await res.json();
+        const data = await res.json();
+        todosLosProductos = (Array.isArray(data) ? data : []).map((p, idx) => ({
+          ...p,
+          id: p.id || `p-${idx + 1}`
+        }));
         productosFiltrados = [...todosLosProductos];
         renderizarProductos();
       } catch (e) {
@@ -303,7 +307,7 @@
     function enviarWhatsAppModal() {
       const precio = calidadSeleccionada === 'OEM' ? productoSeleccionado.priceOEM : productoSeleccionado.priceAlt;
       const total = (precio * cantidadSeleccionada).toFixed(2);
-      const msg = `Hola Hw Andevia, deseo comprar ${cantidadSeleccionada} unidad(es) de "${productoSeleccionado.name}" (${calidadSeleccionada}) por un total de S/ ${total}. ¿Tienen envío disponible?`;
+      const msg = `Hola HW Andevia, deseo comprar ${cantidadSeleccionada} unidad(es) de "${productoSeleccionado.name}" (${calidadSeleccionada}) por un total de S/ ${total}. ¿Tienen envío disponible?`;
       window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
       cerrarModalCompra();
     }

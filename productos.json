@@ -1,6 +1,5 @@
 [
   {
-    "id": "p-001",
     "name": "Kit Cilindro y Pistón Completo 200cc",
     "brand": "TVS",
     "category": "Motor",
@@ -8,13 +7,10 @@
     "priceAlt": 165.0,
     "stockOEM": 12,
     "stockAlt": 25,
-    "skuOEM": "OEM-TVS-CIL200",
-    "skuAlt": "ALT-TVS-CIL200",
-    "imageUrl": "/https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "TVS King 200, TVS Deluxe 200cc"
   },
   {
-    "id": "p-002",
     "name": "Kit Pistón y Anillos Estándar RE 205",
     "brand": "Bajaj",
     "category": "Motor",
@@ -22,13 +18,10 @@
     "priceAlt": 65.0,
     "stockOEM": 18,
     "stockAlt": 40,
-    "skuOEM": "OEM-BAJ-PIS205",
-    "skuAlt": "ALT-BAJ-PIS205",
-    "imageUrl": "/https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "Bajaj Torito RE 205, RE 4S"
   },
   {
-    "id": "p-003",
     "name": "Juego de Discos de Embrague Fibra (6 pzs)",
     "brand": "TVS",
     "category": "Transmisión",
@@ -36,13 +29,10 @@
     "priceAlt": 42.0,
     "stockOEM": 30,
     "stockAlt": 50,
-    "skuOEM": "OEM-TVS-EMB06",
-    "skuAlt": "ALT-TVS-EMB06",
-    "imageUrl": "/https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "TVS King GS, TVS Duramax"
   },
   {
-    "id": "p-004",
     "name": "Carburador Completo Guiado de Acelerador",
     "brand": "Bajaj",
     "category": "Combustible",
@@ -50,13 +40,10 @@
     "priceAlt": 125.0,
     "stockOEM": 8,
     "stockAlt": 15,
-    "skuOEM": "OEM-BAJ-CARB205",
-    "skuAlt": "ALT-BAJ-CARB205",
-    "imageUrl": "/https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "Bajaj RE 205 2T / 4T, Maxima Z"
   },
   {
-    "id": "p-005",
     "name": "Faro Delantero Halógeno / Malla Protectora",
     "brand": "Universal",
     "category": "Sistemas Eléctricos",
@@ -64,13 +51,10 @@
     "priceAlt": 55.0,
     "stockOEM": 15,
     "stockAlt": 30,
-    "skuOEM": "OEM-UNI-FARO01",
-    "skuAlt": "ALT-UNI-FARO01",
-    "imageUrl": "/https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "TVS King, Bajaj Torito, Zongshen"
   },
   {
-    "id": "p-006",
     "name": "Zapatas de Freno Posteriores Reforzadas (Par)",
     "brand": "Bajaj",
     "category": "Frenos",
@@ -78,23 +62,7 @@
     "priceAlt": 32.0,
     "stockOEM": 25,
     "stockAlt": 60,
-    "skuOEM": "OEM-BAJ-ZAPPOST",
-    "skuAlt": "ALT-BAJ-ZAPPOST",
-    "imageUrl": "/https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?auto=format&fit=crop&q=80&w=600",
+    "imageUrl": "https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?auto=format&fit=crop&q=80&w=600",
     "modelCompatibility": "Bajaj RE 205, RE 4S, Maxima Cargo"
-  },
-  {
-    "id": "p-067",
-    "name": "Kawasaki Moto",
-    "brand": "bajaj",
-    "category": "Freno",
-    "priceOEM": 10000.0,
-    "priceAlt": 1.0,
-    "stockOEM": 1,
-    "stockAlt": 10,
-    "skuOEM": "OEM-P-067",
-    "skuAlt": "ALT-P-067",
-    "imageUrl": "/imagenes/default.jpg",
-    "modelCompatibility": "bajaj"
   }
 ]
