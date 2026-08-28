@@ -30,7 +30,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 className="w-5 h-5 object-contain rounded-full bg-white p-0.5"
                 referrerPolicy="no-referrer"
               />
-              <span>HW ANDEVIA SAC TRADING • Especialistas en Mototaxis Perú</span>
+              <span>HW ANDEVIA SAC IMPORT • Especialistas en Mototaxis Perú</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
