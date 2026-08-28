@@ -115,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <span>WhatsApp: +{settings.whatsappNumber}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-emerald-500 shrink-0" />
+              <Truck className="w-4 h-4 text-blue-500 shrink-0" />
               <span>RUC: 10008289293</span>
             </div>
           </div>
