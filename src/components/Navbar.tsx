@@ -1,0 +1,167 @@
+import React from 'react';
+import { ShoppingCart, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import { ProductBrand, StoreSettings } from '../types';
+import { Logo } from './Logo';
+
+interface NavbarProps {
+  settings: StoreSettings;
+  selectedBrand: ProductBrand | 'Todos';
+  onSelectBrand: (brand: ProductBrand | 'Todos') => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  cartCount: number;
+  cartTotal: number;
+  onOpenCart: () => void;
+  onOpenChatIA?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({
+  settings,
+  selectedBrand,
+  onSelectBrand,
+  searchQuery,
+  onSearchChange,
+  cartCount,
+  cartTotal,
+  onOpenCart,
+  onOpenChatIA,
+}) => {
+  return (
+    <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 shadow-xl text-white">
+      {/* Top Announcement Bar */}
+      <div className="bg-gradient-to-r from-red-700 via-amber-600 to-blue-700 text-white text-xs font-semibold py-1.5 px-4 text-center flex items-center justify-center gap-2">
+        <ShieldCheck className="w-4 h-4 text-amber-200" />
+        <span>{settings.noticeText || '🚚 Envíos a todo el Perú por Shalom, Marvisur y Olva Courier.'}</span>
+        <span className="hidden md:inline text-amber-200">| 💬 Pedidos inmediatos por WhatsApp</span>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 gap-4">
+          
+          {/* Logo & Store Title */}
+          <div className="cursor-pointer" onClick={() => onSelectBrand('Todos')}>
+            <Logo size="md" />
+          </div>
+
+          {/* Search Bar - Desktop */}
+          <div className="hidden md:flex flex-1 max-w-md relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Buscar filtros, zapatas, cables, bujías..."
+              className="w-full bg-slate-800 text-slate-100 placeholder-slate-400 text-sm rounded-lg pl-10 pr-4 py-2.5 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-white bg-slate-700 px-1.5 py-0.5 rounded"
+              >
+                Limpiar
+              </button>
+            )}
+          </div>
+
+          {/* Right Action Buttons */}
+          <div className="flex items-center gap-2.5">
+            {/* Chat con IA 24/7 */}
+            <button
+              onClick={onOpenChatIA}
+              className="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-black px-3 py-2 rounded-xl text-xs shadow-md transition-all active:scale-95 border border-orange-400"
+              title="Asistente Virtual IA 24/7"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Asistente IA</span>
+            </button>
+
+            {/* Shopping Cart Button */}
+            <button
+              onClick={onOpenCart}
+              className="relative flex items-center gap-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-lg hover:shadow-red-900/40 transition-all active:scale-95"
+            >
+              <div className="relative">
+                <ShoppingCart className="w-5 h-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-amber-400 text-slate-950 text-xs font-black rounded-full w-5 h-5 flex items-center justify-center animate-pulse shadow-md">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+              <div className="hidden sm:flex flex-col items-start leading-none text-left">
+                <span className="text-[10px] text-red-200 uppercase font-semibold">Mi Carrito</span>
+                <span className="text-sm font-black">S/ {cartTotal.toFixed(2)}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Search Bar */}
+        <div className="md:hidden pb-3">
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Buscar repuestos TVS o Bajaj..."
+              className="w-full bg-slate-800 text-slate-100 placeholder-slate-400 text-sm rounded-lg pl-9 pr-4 py-2 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          </div>
+        </div>
+
+        {/* Brand Selector Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none border-t border-slate-800/80">
+          <span className="text-xs font-semibold text-slate-400 whitespace-nowrap mr-1">Marca:</span>
+          
+          <button
+            onClick={() => onSelectBrand('Todos')}
+            className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+              selectedBrand === 'Todos'
+                ? 'bg-slate-100 text-slate-900 shadow-md scale-105'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
+            }`}
+          >
+            Todas las Marcas
+          </button>
+
+          <button
+            onClick={() => onSelectBrand('TVS')}
+            className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+              selectedBrand === 'TVS'
+                ? 'bg-red-600 text-white shadow-md shadow-red-900/50 scale-105'
+                : 'bg-slate-800 text-slate-300 hover:bg-red-950/60 hover:text-red-300 border border-red-900/40'
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-red-400"></span>
+            TVS King (Deluxe / Duramax)
+          </button>
+
+          <button
+            onClick={() => onSelectBrand('Bajaj')}
+            className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+              selectedBrand === 'Bajaj'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-900/50 scale-105'
+                : 'bg-slate-800 text-slate-300 hover:bg-blue-950/60 hover:text-blue-300 border border-blue-900/40'
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+            Torito Bajaj (2T / 4T / Maxima)
+          </button>
+
+          <button
+            onClick={() => onSelectBrand('Universal')}
+            className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+              selectedBrand === 'Universal'
+                ? 'bg-slate-700 text-amber-300 shadow-md scale-105 border border-amber-500/40'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            Universal / Multimarca
+          </button>
+        </div>
+
+      </div>
+    </header>
+  );
+};
