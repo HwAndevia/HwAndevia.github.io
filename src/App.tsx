@@ -24,6 +24,7 @@ const DEFAULT_STORE_SETTINGS: StoreSettings = {
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
   city: 'Lima, Perú',
+  address: '',
   yapeNumber: '980 722 382',
   plinNumber: '980 722 382',
   bcpAccount: '191-98765432-0-12',

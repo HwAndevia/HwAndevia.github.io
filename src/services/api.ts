@@ -5,6 +5,7 @@ const DEFAULT_SETTINGS: StoreSettings = {
   storeName: 'HW ANDEVIA SAC IMPORT - Repuestos TVS & Torito Bajaj',
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
+  address:'',
   city: 'Lima, Perú',
   yapeNumber: '980 722 382',
   plinNumber: '980 722 382',
