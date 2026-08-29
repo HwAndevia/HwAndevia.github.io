@@ -23,7 +23,6 @@ const DEFAULT_STORE_SETTINGS: StoreSettings = {
   storeName: 'HW ANDEVIA SAC I - Repuestos TVS & Torito Bajaj',
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
-  address: 'Av. Las Flores de Primavera 1420, San Juan de Lurigancho',
   city: 'Lima, Perú',
   yapeNumber: '980 722 382',
   plinNumber: '980 722 382',
