@@ -297,7 +297,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         required
                         value={orderDetails.cityDistrict}
                         onChange={(e) => setOrderDetails({ ...orderDetails, cityDistrict: e.target.value })}
-                        placeholder="Ej. Lima SJL / Trujillo"
+                        placeholder="Lima"
                         className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500"
                       />
                     </div>

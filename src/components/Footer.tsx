@@ -108,7 +108,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
           <div className="space-y-2 text-slate-400 text-xs">
             <div className="flex items-start gap-2">
               <MapPin className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-              <span>{settings.address}, {settings.city}</span>
+              <span>{settings.city}</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-emerald-500 shrink-0" />
