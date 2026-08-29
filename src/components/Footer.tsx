@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <Truck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-extrabold text-white text-sm">Envíos a Nivel Nacional</h4>
+              <h4 className="font-extrabold text-white text-sm">Envíos a Lima</h4>
               <p className="text-slate-400 text-xs mt-0.5">
                 Despacho diario vía Shalom, Marvisur y Olva Courier a todo el Perú.
               </p>
