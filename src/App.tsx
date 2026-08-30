@@ -7,7 +7,7 @@ import {
 
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
-import { CategoryFilter } from './components/CategoryFilter';
+//import { CategoryFilter } from './components/CategoryFilter';
 import { ProductCard } from './components/ProductCard';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -276,13 +276,13 @@ export default function App() {
           )}
 
           {/* Sticky Category & Quality Filter Bar */}
-          <CategoryFilter
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            selectedQuality={selectedQuality}
-            onSelectQuality={setSelectedQuality}
-            categoryCounts={categoryCounts}
-          />
+          {/*<CategoryFilter
+       //     selectedCategory={selectedCategory}
+       //     onSelectCategory={setSelectedCategory}
+       //     selectedQuality={selectedQuality}
+       //     onSelectQuality={setSelectedQuality}
+       //     categoryCounts={categoryCounts}
+          />*/}
 
           {/* Main Product Catalog Section */}
           <main id="catalog-section" className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
@@ -298,9 +298,6 @@ export default function App() {
                     {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  Muestra productos para <strong className="text-slate-700">{selectedBrand}</strong> • Categoría: <strong className="text-slate-700">{selectedCategory}</strong>
-                </p>
               </div>
 
               {/* Active Filters Reset */}

@@ -181,7 +181,7 @@ export const BuyModal: React.FC<BuyModalProps> = ({
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs font-black text-slate-900 flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
-                      Alternativa A1
+                      Alternativa
                     </span>
                     {quality === 'Alternativa' && (
                       <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />

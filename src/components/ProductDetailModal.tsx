@@ -132,7 +132,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   >
                     <div className="flex items-center gap-1.5 text-xs font-bold text-blue-900">
                       <CheckCircle2 className="w-4 h-4 text-blue-600" />
-                      <span>Alternativa Premium</span>
+                      <span>Alternativa</span>
                     </div>
                     <div className="text-sm font-black text-slate-900 mt-1">
                       S/ {product.priceAlt.toFixed(2)}

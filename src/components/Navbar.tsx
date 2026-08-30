@@ -28,13 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 shadow-xl text-white">
-      {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-red-700 via-amber-600 to-blue-700 text-white text-xs font-semibold py-1.5 px-4 text-center flex items-center justify-center gap-2">
-        <ShieldCheck className="w-4 h-4 text-amber-200" />
-        <span>{settings.noticeText || '🚚 Envíos a todo el Perú por Shalom, Marvisur y Olva Courier.'}</span>
-        <span className="hidden md:inline text-amber-200">| 💬 Pedidos inmediatos por WhatsApp</span>
-      </div>
-
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-4">
           

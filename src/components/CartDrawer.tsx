@@ -62,7 +62,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     message += `🛒 *DETALLE DEL PEDIDO:*\n`;
 
     cartItems.forEach((item, index) => {
-      const qualityLabel = item.quality === 'OEM' ? 'Original OEM 🟢' : 'Alternativa Premium 🔵';
+      const qualityLabel = item.quality === 'OEM' ? 'Original 🟢' : 'Alternativa 🔵';
       const lineTotal = (item.unitPrice * item.quantity).toFixed(2);
       message += `${index + 1}. *${item.product.name}*\n`;
       message += `   • Cantidad: ${item.quantity}\n`;

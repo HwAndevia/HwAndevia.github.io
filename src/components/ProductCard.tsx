@@ -53,7 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Brand Badge */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center">
-          <span className={`text-[11px] font-black uppercase px-2.5 py-1 rounded-lg shadow-md border ${brandColors[product.brand]}`}>
+          <span className={`text-[11px] font-black uppercase px-2.5 py-1 rounded-lg shadow-md border ${brandColors[product.brand as keyof typeof brandColors]}`}>
             {product.brand === 'Bajaj' ? 'Torito Bajaj' : product.brand}
           </span>
           {product.isFeatured && (
@@ -82,10 +82,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div>
           {/* Category & Compatibility */}
           <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
-            <span className="font-semibold text-red-600 uppercase tracking-wider text-[10px]">
+            <span className="font-semibold text-red-600 uppercase tracking-wider text-[13px]">
               {product.category}
             </span>
-            <span className="truncate max-w-[150px] text-right font-medium text-slate-400" title={product.modelCompatibility}>
+            <span className="font-semibold text-slate-800 uppercase tracking-wider text-[13px]" title={product.modelCompatibility}>
               {product.modelCompatibility}
             </span>
           </div>
@@ -93,7 +93,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {/* Title */}
           <h3
             onClick={() => onOpenDetail(product)}
-            className="font-bold text-slate-900 text-sm leading-snug line-clamp-2 hover:text-red-600 cursor-pointer transition-colors"
+            className="font-semibold text-slate-900 text-base leading-snug line-clamp-2 hover:text-red-600 cursor-pointer transition-colors"
             title={product.name}
           >
             {product.name}
@@ -106,17 +106,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* QUALITY SELECTOR (OEM vs Alternative) */}
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-2 space-y-1.5">
-          <div className="flex items-center justify-between text-[11px] font-bold text-slate-600 uppercase tracking-tight">
+          <div className="font-semibold flex items-center justify-between text-[14px] text-slate-600 tracking-tight">
             <span>Seleccionar Calidad:</span>
             {selectedQuality === 'OEM' ? (
-              <span className="text-amber-700 font-extrabold flex items-center gap-1">
+              <span className="text-amber-700 font-semibold flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3 text-amber-600" />
-                Original OEM
+                Original
               </span>
             ) : (
-              <span className="text-blue-700 font-extrabold flex items-center gap-1">
+              <span className="text-blue-700 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3 text-blue-600" />
-                Alternativa Premium
+                Alternativa
               </span>
             )}
           </div>
@@ -126,13 +126,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <button
               type="button"
               onClick={() => setSelectedQuality('OEM')}
-              className={`py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center border ${
+              className={`py-1.5 px-2 rounded-lg text-xs font-semibold transition-all flex flex-col items-center justify-center border ${
                 selectedQuality === 'OEM'
-                  ? 'bg-amber-500 text-slate-950 border-amber-600 shadow-sm font-extrabold'
-                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+                  ? 'bg-amber-500 text-black border-amber-600 shadow-sm font-bold'
+                  : 'bg-orange-300 text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
-              <span className="text-[10px] leading-tight">Original</span>
+              <span className="text-[14px] leading-tight">Original</span>
               <span className="text-xs">S/ {product.priceOEM.toFixed(2)}</span>
             </button>
 
@@ -142,34 +142,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               onClick={() => setSelectedQuality('Alternativa')}
               className={`py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center border ${
                 selectedQuality === 'Alternativa'
-                  ? 'bg-blue-600 text-white border-blue-700 shadow-sm font-extrabold'
-                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+                  ? 'bg-blue-600 text-white border-blue-700 shadow-sm font-semibold'
+                  : 'bg-blue-300 text-gray-600 border-slate-200 hover:bg-slate-100'
               }`}
             >
-              <span className="text-[10px] leading-tight">Alternativa</span>
+              <span className="text-[14px] leading-tight">Alternativa</span>
               <span className="text-xs">S/ {product.priceAlt.toFixed(2)}</span>
             </button>
           </div>
           {selectedQuality === 'Alternativa' && product.brandAltName && (
-            <div className="text-[10px] text-blue-800 text-center font-medium bg-blue-50/80 rounded py-0.5 border border-blue-100">
+            <div className="text-[14px] text-blue-800 text-center font-medium bg-blue-50/80 rounded py-0.5 border border-blue-100">
               Marca: {product.brandAltName}
             </div>
           )}
         </div>
 
         {/* Price & Primary Comprar Button */}
-        <div className="pt-1 flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
+        <div className="pt-4 flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
           <div>
-            <span className="text-[10px] text-slate-400 block font-semibold uppercase leading-none">
+            <span className="text-[14px] text-slate-600 block font-semibold leading-none">
               Precio ({selectedQuality})
             </span>
-            <div className="text-lg font-black text-slate-900 tracking-tight">
+            <div className="text-[18px] font-black text-slate-900 font-extrabold tracking-tight">
               S/ {currentPrice.toFixed(2)}
             </div>
             {/* Stock indicator */}
-            <div className="text-[10px] font-semibold mt-0.5">
+            <div className="text-[13px] font-semibold mt-0.5">
               {isOutOfStock ? (
-                <span className="text-red-600 font-bold">Agotado</span>
+                <span className="text-red-600 font-medium">Agotado</span>
               ) : (
                 <span className="text-emerald-700 font-medium">
                   {currentStock} disponibles
@@ -182,7 +182,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             disabled={isOutOfStock}
             onClick={() => onOpenBuyModal?.(product, selectedQuality)}
-            className={`flex items-center gap-1.5 font-bold px-4 py-2.5 rounded-xl transition-all shadow-md active:scale-95 text-xs ${
+            className={`flex items-center gap-1.5 font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md active:scale-95 text-xs ${
               isOutOfStock
                 ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300'
                 : 'bg-emerald-600 hover:bg-emerald-500 text-white font-black hover:shadow-emerald-600/30 uppercase tracking-wide'
