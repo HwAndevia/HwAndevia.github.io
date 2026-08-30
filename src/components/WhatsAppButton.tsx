@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { buildWhatsAppUrl } from '../utils/Whatsapp.ts';
 
 export interface WhatsAppButtonProps {
@@ -46,7 +46,7 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
     >
       {children || (
         <>
-          <MessageCircle className="w-7 h-7 fill-white" />
+          <Phone className="w-7 h-7 fill-white" />
           <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-black pl-0 group-hover:pl-2">
             Consulta por WhatsApp
           </span>
