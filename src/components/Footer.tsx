@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
             <div>
               <h4 className="font-extrabold text-white text-sm">Garantía de Repuesto</h4>
               <p className="text-slate-400 text-xs mt-0.5">
-                Calidad OEM Original y marcas alternativas de calidad probada.
+                Calidad Original y marcas alternativas de calidad probada.
               </p>
             </div>
           </div>

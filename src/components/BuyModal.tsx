@@ -35,7 +35,7 @@ export const BuyModal: React.FC<BuyModalProps> = ({
 
   const handleWhatsAppBuy = () => {
     if (isOutOfStock) return;
-    const qualityLabel = quality === 'OEM' ? 'OEM Original' : 'Alternativa A1';
+    const qualityLabel = quality === 'OEM' ? 'Original' : 'Alternativa A1';
     const skuLine = sku ? `\n🔢 SKU: ${sku}` : '';
     const msg = `Hola HW Andevia, deseo comprar el siguiente repuesto:
 📌 Producto: ${product.name}
@@ -150,7 +150,7 @@ export const BuyModal: React.FC<BuyModalProps> = ({
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs font-black text-slate-900 flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-                      OEM Original
+                      Original
                     </span>
                     {quality === 'OEM' && (
                       <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />

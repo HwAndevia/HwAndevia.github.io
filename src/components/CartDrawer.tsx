@@ -181,7 +181,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         {item.quality === 'OEM' ? (
                           <span className="text-[10px] font-extrabold bg-amber-100 text-amber-800 border border-amber-300 px-1.5 py-0.5 rounded flex items-center gap-0.5">
                             <ShieldCheck className="w-3 h-3 text-amber-600" />
-                            OEM Original
+                            Original
                           </span>
                         ) : (
                           <span className="text-[10px] font-extrabold bg-blue-100 text-blue-800 border border-blue-300 px-1.5 py-0.5 rounded flex items-center gap-0.5">

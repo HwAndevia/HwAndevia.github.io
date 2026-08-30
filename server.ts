@@ -85,7 +85,7 @@ CATÁLOGO ACTUAL DE REPUESTOS Y STOCK EN TIENDA:
 ${catalogContext || "Disponemos de filtros de aceite, filtros de aire, filtros de gasolina, bujías, cables de embrague/acelerador/freno, kits de cilindro y pistón, zapatas y pastillas de freno para TVS y Bajaj."}
 
 CAPACIDADES Y LÓGICA DE RESPUESTA:
-1. DISPONIBILIDAD Y STOCK: Revisa el catálogo para confirmar con certeza si un repuesto está disponible en stock o si no se cuenta actualmente. Si está en stock, indica sus calidades (OEM Original vs Alternativo A1) y sus precios en Soles (S/). Si no lo tenemos en el catálogo, indícaselo con sinceridad al cliente y recomiéndale consultar por WhatsApp por si se puede traer a pedido.
+1. DISPONIBILIDAD Y STOCK: Revisa el catálogo para confirmar con certeza si un repuesto está disponible en stock o si no se cuenta actualmente. Si está en stock, indica sus calidades (Original vs Alternativo A1) y sus precios en Soles (S/). Si no lo tenemos en el catálogo, indícaselo con sinceridad al cliente y recomiéndale consultar por WhatsApp por si se puede traer a pedido.
 2. LÓGICA MECÁNICA Y DIAGNÓSTICO: Puedes responder con lógica y razonamiento técnico sobre fallas mecánicas de mototaxis (ej. síntomas de embrague gastado, por qué quema aceite, problemas de compresión, cuándo cambiar filtros, bujías, etc.) y guiar al usuario hacia la solución o repuesto indicado.
 3. CONVERSACIÓN NATURAL: Responde de forma cordial, inteligente y fluida. Si te hacen preguntas de lógica general sobre mototaxis, mantenimiento o compra, responde con buen criterio.
 4. LÍMITE DE LONGITUD: Respuestas claras y estructuradas, de máximo 250 palabras.
@@ -126,7 +126,7 @@ CAPACIDADES Y LÓGICA DE RESPUESTA:
       if (!replyText) {
         const lower = prompt.toLowerCase();
         if (lower.includes("filtro") && lower.includes("aceite")) {
-          replyText = "¡Sí maestro! Tenemos stock permanente de filtros de aceite: para Torito Bajaj 4T / Maxima (OEM Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis deseas coordinar?";
+          replyText = "¡Sí maestro! Tenemos stock permanente de filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis deseas coordinar?";
         } else if (lower.includes("filtro") && lower.includes("aire")) {
           replyText = "¡Sí tenemos filtros de aire maestro! Para Torito Bajaj 4T (OEM: S/ 25.00 | Alternativo A1: S/ 14.00) y TVS King 200 (OEM: S/ 28.00 | Alternativo A1: S/ 15.00).";
         } else if (lower.includes("filtro") && (lower.includes("gasolina") || lower.includes("combustible"))) {
@@ -140,7 +140,7 @@ CAPACIDADES Y LÓGICA DE RESPUESTA:
         } else if (lower.includes("cilindro") || lower.includes("piston") || lower.includes("pistón") || lower.includes("anillo")) {
           replyText = "Contamos con kits de cilindro + pistón + anillos estándar y sobremedida para TVS King 200cc y Bajaj RE 205cc (OEM y Alternativo A1).";
         } else if (lower.includes("precio") || lower.includes("cuanto") || lower.includes("cuánto") || lower.includes("costo")) {
-          replyText = "Manejamos precios al por mayor y menor en Soles (S/) tanto en OEM Original como en Alternativa A1. ¿Qué repuesto específico buscas para darte la cotización exacta?";
+          replyText = "Manejamos precios al por mayor y menor en Soles (S/) tanto en Original como en Alternativa A1. ¿Qué repuesto específico buscas para darte la cotización exacta?";
         } else if (lower.includes("envio") || lower.includes("delivery") || lower.includes("provincia")) {
           replyText = "Hacemos envíos diarios a todo el Perú: delivery express en Lima y despachos a provincias por agencias de carga (Shalom, Marvisur, Flores).";
         } else {

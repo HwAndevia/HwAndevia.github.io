@@ -184,7 +184,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
       
       const lower = userText.toLowerCase();
       if (lower.includes('filtro') && lower.includes('aceite')) {
-        errorResponse = '¡Sí maestro! Tenemos en stock filtros de aceite: para Torito Bajaj 4T / Maxima (OEM Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de los dos modelos necesitas?';
+        errorResponse = '¡Sí maestro! Tenemos en stock filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de los dos modelos necesitas?';
       } else if (lower.includes('filtro') && lower.includes('aire')) {
         errorResponse = '¡Sí maestro! Contamos con filtros de aire para Torito Bajaj 4T (OEM: S/ 25.00 | Alt: S/ 14.00) y TVS King 200 (OEM: S/ 28.00 | Alt: S/ 15.00).';
       } else if (lower.includes('bujia') || lower.includes('bujía')) {

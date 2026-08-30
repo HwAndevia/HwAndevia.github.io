@@ -194,7 +194,7 @@ export default function App() {
     });
 
     // Toast feedback
-    const qualityLabel = quality === 'OEM' ? 'OEM Original' : 'Alternativa';
+    const qualityLabel = quality === 'OEM' ? 'Original' : 'Alternativa';
     showToast(`¡Añadido al carrito: ${product.name} (${qualityLabel})!`);
   };
 

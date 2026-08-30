@@ -115,7 +115,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
               }`}
             >
               <Sparkles className="w-3 h-3 text-amber-700" />
-              Solo OEM Original
+              Solo Original
             </button>
 
             <button

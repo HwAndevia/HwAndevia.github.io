@@ -29,7 +29,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   const handleBuyWhatsApp = () => {
     if (isOutOfStock) return;
-    const qualityLabel = selectedQuality === 'OEM' ? 'OEM Original' : 'Alternativa';
+    const qualityLabel = selectedQuality === 'OEM' ? 'Original' : 'Alternativa';
     const msg = `Hola HW Andevia, deseo comprar ${quantity} unidad(es) de "${product.name}" (${qualityLabel}) por un total de S/ ${(currentPrice * quantity).toFixed(2)}.`;
     const safeUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber.replace(/\D/g, '')}&text=${encodeURIComponent(msg.normalize('NFC'))}`;
     window.open(safeUrl, '_blank');

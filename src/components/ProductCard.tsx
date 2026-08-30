@@ -132,7 +132,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
-              <span className="text-[10px] leading-tight">OEM Original</span>
+              <span className="text-[10px] leading-tight">Original</span>
               <span className="text-xs">S/ {product.priceOEM.toFixed(2)}</span>
             </button>
 

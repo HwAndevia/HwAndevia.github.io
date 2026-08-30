@@ -22,23 +22,13 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           
           {/* Main Copy */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
-            
-            <div className="inline-flex items-center gap-2.5 bg-slate-800/80 border border-amber-500/30 text-amber-300 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-inner">
-              <img
-                src="/Logoimport.jpg"
-                alt="HW ANDEVIA"
-                className="w-5 h-5 object-contain rounded-full bg-white p-0.5"
-                referrerPolicy="no-referrer"
-              />
-          
-            </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-              Repuestos para <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-300 to-amber-500">TVS King</span> y <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Torito Bajaj</span>
+              Tienda HW ANDEVIA Repuestos para <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-300 to-amber-500">TVS King</span> y <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Torito Bajaj</span>
             </h1>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Encuentra repuestos garantizados con dos niveles de calidad: <strong className="text-amber-300 font-semibold">Calidad OEM Original</strong> y <strong className="text-blue-300 font-semibold">Alternativa Premium</strong>. Filtros, frenos, cables, bujías y más con envío inmediato.
+              Encuentra repuestos garantizados con dos niveles de calidad: <strong className="text-amber-300 font-semibold">Calidad Original</strong> y <strong className="text-blue-300 font-semibold">Alternativa Premium</strong>. Filtros, frenos, cables, bujías y más con envío inmediato.
             </p>
 
             {/* Quality Comparison Badges */}
