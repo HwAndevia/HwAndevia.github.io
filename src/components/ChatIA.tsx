@@ -228,7 +228,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
               <div className="w-10 h-10 rounded-xl bg-white p-0.5 border border-amber-400/40 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
                 <img
                   src="/Logoimport.jpg"
-                  alt="HW ANDEVIA SAC Logo"
+                  alt="HW ANDEVIA Logo"
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
@@ -238,7 +238,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
               </div>
               <div>
                 <h3 className="font-bold text-sm sm:text-base flex items-center gap-2 text-white leading-tight">
-                  <span>HW ANDEVIA SAC</span>
+                  <span>HW ANDEVIA</span>
                   <span className="bg-orange-500 text-slate-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-full">
                     IA 24/7
                   </span>

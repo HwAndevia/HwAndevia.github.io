@@ -33,7 +33,7 @@ export const Logo: React.FC<LogoProps> = ({
         {!imageError ? (
           <img
             src="/Logoimport.jpg"
-            alt="HW ANDEVIA SAC IMPORT Logo"
+            alt="HW ANDEVIA IMPORT Logo"
             className="w-full h-full object-contain rounded-lg"
             referrerPolicy="no-referrer"
             onError={() => setImageError(true)}
@@ -86,7 +86,7 @@ export const Logo: React.FC<LogoProps> = ({
               fontSize="7"
               letterSpacing="1"
             >
-              ANDEVIA SAC
+              ANDEVIA
             </text>
           </svg>
         )}
@@ -97,7 +97,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className="flex flex-col leading-tight">
           <div className="flex items-center gap-1.5">
             <span className={`${currentSize.title} font-black tracking-tight text-white uppercase`}>
-              HW <span className="text-amber-400">ANDEVIA</span> <span className="text-slate-300 text-xs font-bold">SAC</span>
+              HW <span className="text-amber-400">ANDEVIA</span>
             </span>
             <span className="hidden sm:inline-block bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-amber-500/40 tracking-wider">
               IMPORT

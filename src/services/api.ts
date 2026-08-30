@@ -2,7 +2,7 @@ import { Product, StoreSettings } from '../types';
 
 const DEFAULT_SETTINGS: StoreSettings = {
   whatsappNumber: '51980722382',
-  storeName: 'HW ANDEVIA SAC IMPORT - Repuestos TVS & Torito Bajaj',
+  storeName: 'HW ANDEVIA IMPORT - Repuestos TVS & Torito Bajaj',
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
   address:'',

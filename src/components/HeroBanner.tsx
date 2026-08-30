@@ -26,11 +26,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             <div className="inline-flex items-center gap-2.5 bg-slate-800/80 border border-amber-500/30 text-amber-300 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-inner">
               <img
                 src="/Logoimport.jpg"
-                alt="HW ANDEVIA SAC"
+                alt="HW ANDEVIA"
                 className="w-5 h-5 object-contain rounded-full bg-white p-0.5"
                 referrerPolicy="no-referrer"
               />
-              <span>HW ANDEVIA SAC IMPORT • Especialistas en Mototaxis Perú</span>
+              <span>HW ANDEVIA • Especialistas en Mototaxis Perú</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">

@@ -20,7 +20,7 @@ import { Loader2, RefreshCw, Check, Sparkles } from 'lucide-react';
 
 const DEFAULT_STORE_SETTINGS: StoreSettings = {
   whatsappNumber: '51980722382',
-  storeName: 'HW ANDEVIA SAC I - Repuestos TVS & Torito Bajaj',
+  storeName: 'HW ANDEVIA - Repuestos TVS & Torito Bajaj',
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
   city: 'Lima, Perú',
