@@ -74,13 +74,10 @@ export const BuyModal: React.FC<BuyModalProps> = ({
                 <ShoppingCart className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-extrabold text-base text-white leading-tight flex items-center gap-2">
+                <h3 className="font-bold text-base text-white leading-tight flex items-center gap-2">
                   Confirmar Compra
-                  <span className="bg-emerald-500 text-slate-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-full">
-                    Atención Directa
-                  </span>
                 </h3>
-                <p className="text-xs text-slate-400">Selecciona la calidad y cantidad de tu pedido</p>
+                <p className="text-sm text-slate-400">Selecciona la calidad y cantidad de tu pedido</p>
               </div>
             </div>
 
@@ -108,17 +105,17 @@ export const BuyModal: React.FC<BuyModalProps> = ({
               <div className="flex-1 min-w-0 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                    <span className="bg-slate-900 text-amber-400 text-[10px] font-black px-2 py-0.5 rounded uppercase">
+                    <span className="bg-slate-900 text-white text-[16px] font-black px-1.5 py-0.2 rounded uppercase">
                       {product.brand}
                     </span>
-                    <span className="text-[10px] text-slate-500 font-semibold truncate">
+                    <span className="pr-1 text-[16px] text-slate-600 font-semibold truncate">
                       {product.category}
                     </span>
                   </div>
-                  <h4 className="font-bold text-slate-900 text-sm sm:text-base leading-snug line-clamp-2">
+                  <h4 className="pt-3 font-bold text-slate-900 text-[20px] leading-snug line-clamp-2">
                     {product.name}
                   </h4>
-                  <p className="text-xs text-slate-500 mt-0.5 font-medium">
+                  <p className="pt-3 text-[16px] text-slate-500 mt-0.5 font-medium">
                     Compatibilidad: <span className="text-slate-800 font-bold">{product.modelCompatibility}</span>
                   </p>
                 </div>
@@ -133,7 +130,7 @@ export const BuyModal: React.FC<BuyModalProps> = ({
 
             {/* SELECCIÓN DE CALIDAD (OEM vs ALTERNATIVA) */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-slate-700 tracking-wider mb-2">
                 1. Selecciona la Calidad del Repuesto:
               </label>
               <div className="grid grid-cols-2 gap-2.5">
