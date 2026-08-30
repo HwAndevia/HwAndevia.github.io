@@ -107,9 +107,9 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             </button>
 
             <button
-              onClick={() => onSelectQuality('OEM')}
+              onClick={() => onSelectQuality('Original')}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all text-xs font-bold ${
-                selectedQuality === 'OEM'
+                selectedQuality === 'Original'
                   ? 'bg-amber-500 text-slate-950 shadow font-extrabold'
                   : 'text-slate-700 hover:text-amber-700 hover:bg-amber-50'
               }`}

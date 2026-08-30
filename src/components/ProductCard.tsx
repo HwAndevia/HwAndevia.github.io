@@ -20,11 +20,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   whatsappNumber = '51980722382',
 }) => {
   // Local state for quality toggle on card
-  const [selectedQuality, setSelectedQuality] = useState<QualityTier>('OEM');
+  const [selectedQuality, setSelectedQuality] = useState<QualityTier>('Original');
   const [isHovered, setIsHovered] = useState(false);
 
-  const currentPrice = selectedQuality === 'OEM' ? product.priceOEM : product.priceAlt;
-  const currentStock = selectedQuality === 'OEM' ? product.stockOEM : product.stockAlt;
+  const currentPrice = selectedQuality === 'Original' ? product.priceOriginal : product.priceAlt;
+  const currentStock = selectedQuality === 'Original' ? product.stockOriginal : product.stockAlt;
   const isOutOfStock = currentStock <= 0;
 
   const brandColors = {
@@ -104,11 +104,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </p>
         </div>
 
-        {/* QUALITY SELECTOR (OEM vs Alternative) */}
+        {/* QUALITY SELECTOR (Original vs Alternative) */}
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-2 space-y-1.5">
           <div className="font-semibold flex items-center justify-between text-[14px] text-slate-600 tracking-tight">
             <span>Seleccionar Calidad:</span>
-            {selectedQuality === 'OEM' ? (
+            {selectedQuality === 'Original' ? (
               <span className="text-amber-700 font-semibold flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3 text-amber-600" />
                 Original
@@ -122,18 +122,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-1">
-            {/* OEM Option */}
+            {/* Original Option */}
             <button
               type="button"
-              onClick={() => setSelectedQuality('OEM')}
+              onClick={() => setSelectedQuality('Original')}
               className={`py-1.5 px-2 rounded-lg text-xs font-semibold transition-all flex flex-col items-center justify-center border ${
-                selectedQuality === 'OEM'
+                selectedQuality === 'Original'
                   ? 'bg-amber-500 text-black border-amber-600 shadow-sm font-bold'
                   : 'bg-orange-300 text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
               <span className="text-[14px] leading-tight">Original</span>
-              <span className="text-xs">S/ {product.priceOEM.toFixed(2)}</span>
+              <span className="text-xs">S/ {product.priceOriginal.toFixed(2)}</span>
             </button>
 
             {/* Alternative Option */}

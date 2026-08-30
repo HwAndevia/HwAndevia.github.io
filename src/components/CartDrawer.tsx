@@ -6,8 +6,8 @@ interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   cartItems: CartItem[];
-  onUpdateQuantity: (productId: string, quality: 'OEM' | 'Alternativa', quantity: number) => void;
-  onRemoveItem: (productId: string, quality: 'OEM' | 'Alternativa') => void;
+  onUpdateQuantity: (productId: string, quality: 'Original' | 'Alternativa', quantity: number) => void;
+  onRemoveItem: (productId: string, quality: 'Original' | 'Alternativa') => void;
   onClearCart: () => void;
   settings: StoreSettings;
 }
@@ -62,7 +62,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     message += `🛒 *DETALLE DEL PEDIDO:*\n`;
 
     cartItems.forEach((item, index) => {
-      const qualityLabel = item.quality === 'OEM' ? 'Original 🟢' : 'Alternativa 🔵';
+      const qualityLabel = item.quality === 'Original' ? 'Original 🟢' : 'Alternativa 🔵';
       const lineTotal = (item.unitPrice * item.quantity).toFixed(2);
       message += `${index + 1}. *${item.product.name}*\n`;
       message += `   • Cantidad: ${item.quantity}\n`;
@@ -178,7 +178,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         <span className="text-[10px] font-black uppercase text-slate-500 bg-slate-200 px-1.5 py-0.5 rounded">
                           {item.product.brand}
                         </span>
-                        {item.quality === 'OEM' ? (
+                        {item.quality === 'Original' ? (
                           <span className="text-[10px] font-extrabold bg-amber-100 text-amber-800 border border-amber-300 px-1.5 py-0.5 rounded flex items-center gap-0.5">
                             <ShieldCheck className="w-3 h-3 text-amber-600" />
                             Original

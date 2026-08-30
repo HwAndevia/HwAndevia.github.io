@@ -53,7 +53,7 @@ export default function App() {
   const [chatProductContext, setChatProductContext] = useState<{
     product: Product;
     quantity: number;
-    quality: 'OEM' | 'Alternativa';
+    quality: 'Original' | 'Alternativa';
   } | null>(null);
 
   // Buy Modal State
@@ -73,7 +73,7 @@ export default function App() {
     if (product) {
       setChatProductContext({
         product,
-        quality: quality || 'OEM',
+        quality: quality || 'Original',
         quantity: quantity || 1
       });
     } else {
@@ -152,7 +152,7 @@ export default function App() {
           p.modelCompatibility || '',
           p.description || '',
           p.brandAltName || '',
-          p.skuOEM || '',
+          p.skuOriginal || '',
           p.skuAlt || '',
           ...(p.specifications ? Object.entries(p.specifications).map(([k, v]) => `${k} ${v}`) : [])
         ].join(' ').toLowerCase();
@@ -177,7 +177,7 @@ export default function App() {
 
   // Cart operations
   const handleAddToCart = (product: Product, quality: QualityTier, quantity: number = 1) => {
-    const unitPrice = quality === 'OEM' ? product.priceOEM : product.priceAlt;
+    const unitPrice = quality === 'Original' ? product.priceOriginal : product.priceAlt;
     
     setCart((prevCart) => {
       const existingIndex = prevCart.findIndex(
@@ -194,7 +194,7 @@ export default function App() {
     });
 
     // Toast feedback
-    const qualityLabel = quality === 'OEM' ? 'Original' : 'Alternativa';
+    const qualityLabel = quality === 'Original' ? 'Original' : 'Alternativa';
     showToast(`¡Añadido al carrito: ${product.name} (${qualityLabel})!`);
   };
 
@@ -414,7 +414,7 @@ export default function App() {
       <BuyModal
         isOpen={!!buyModalContext}
         product={buyModalContext?.product || null}
-        initialQuality={buyModalContext?.quality || 'OEM'}
+        initialQuality={buyModalContext?.quality || 'Original'}
         onClose={() => setBuyModalContext(null)}
         onAddToCart={handleAddToCart}
         onOpenChatIA={(p, qual, qty) => handleOpenChatIA(p, qual, qty)}

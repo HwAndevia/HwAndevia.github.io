@@ -47,7 +47,7 @@ async function startServer() {
           catalogContext = prods
             .map(
               (p: any) =>
-                `- ${p.name} | Marca: ${p.brand} | Cat: ${p.category} | OEM: S/${p.priceOEM} | Alt: S/${p.priceAlt} | Stock OEM: ${p.stockOEM} | Stock Alt: ${p.stockAlt} | Comp: ${p.modelCompatibility}`
+                `- ${p.name} | Marca: ${p.brand} | Cat: ${p.category} | Original: S/${p.priceOriginal} | Alt: S/${p.priceAlt} | Stock Original: ${p.stockOriginal} | Stock Alt: ${p.stockAlt} | Comp: ${p.modelCompatibility}`
             )
             .join("\n");
         }
@@ -60,11 +60,11 @@ async function startServer() {
         const lower = prompt.toLowerCase();
         let fallbackReply = "¡Hola maestro! En HW Andevia tenemos repuestos originales y alternativos A1 para TVS y Bajaj.";
         if (lower.includes("filtro") && lower.includes("aceite")) {
-          fallbackReply = "¡Sí tenemos stock de filtros de aceite, maestro! Disponemos para Torito Bajaj 4T / Maxima (OEM: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis necesitas y cuántas unidades te despachamos?";
+          fallbackReply = "¡Sí tenemos stock de filtros de aceite, maestro! Disponemos para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (Original: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis necesitas y cuántas unidades te despachamos?";
         } else if (lower.includes("filtro") && lower.includes("aire")) {
-          fallbackReply = "¡Sí maestro! Contamos con filtros de aire para Torito Bajaj 4T (OEM: S/ 25.00 | Alt: S/ 14.00) y TVS King 200 (OEM: S/ 28.00 | Alt: S/ 15.00) con esponja y papel de alta filtración.";
+          fallbackReply = "¡Sí maestro! Contamos con filtros de aire para Torito Bajaj 4T (Original: S/ 25.00 | Alt: S/ 14.00) y TVS King 200 (Original: S/ 28.00 | Alt: S/ 15.00) con esponja y papel de alta filtración.";
         } else if (lower.includes("freno") || lower.includes("zapata") || lower.includes("pastilla")) {
-          fallbackReply = "Contamos con zapatas de freno traseras y delanteras de alta fricción para Bajaj y TVS (OEM y Alternativas A1 sin asbesto).";
+          fallbackReply = "Contamos con zapatas de freno traseras y delanteras de alta fricción para Bajaj y TVS (Original y Alternativas A1 sin asbesto).";
         }
         return res.json({ reply: fallbackReply, text: fallbackReply });
       }
@@ -126,25 +126,25 @@ CAPACIDADES Y LÓGICA DE RESPUESTA:
       if (!replyText) {
         const lower = prompt.toLowerCase();
         if (lower.includes("filtro") && lower.includes("aceite")) {
-          replyText = "¡Sí maestro! Tenemos stock permanente de filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis deseas coordinar?";
+          replyText = "¡Sí maestro! Tenemos stock permanente de filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (Original: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de las dos mototaxis deseas coordinar?";
         } else if (lower.includes("filtro") && lower.includes("aire")) {
-          replyText = "¡Sí tenemos filtros de aire maestro! Para Torito Bajaj 4T (OEM: S/ 25.00 | Alternativo A1: S/ 14.00) y TVS King 200 (OEM: S/ 28.00 | Alternativo A1: S/ 15.00).";
+          replyText = "¡Sí tenemos filtros de aire maestro! Para Torito Bajaj 4T (Original: S/ 25.00 | Alternativo A1: S/ 14.00) y TVS King 200 (Original: S/ 28.00 | Alternativo A1: S/ 15.00).";
         } else if (lower.includes("filtro") && (lower.includes("gasolina") || lower.includes("combustible"))) {
-          replyText = "Disponemos de filtros de gasolina sellados de alto flujo para TVS King y Bajaj RE 205 (OEM: S/ 15.00 | Alternativo A1: S/ 8.00).";
+          replyText = "Disponemos de filtros de gasolina sellados de alto flujo para TVS King y Bajaj RE 205 (Original: S/ 15.00 | Alternativo A1: S/ 8.00).";
         } else if (lower.includes("bujia") || lower.includes("bujía")) {
-          replyText = "Contamos con bujías para mototaxi: Champion / Bosch y OEM Originales para Bajaj 4T (S/ 12.00) y TVS King (S/ 14.00).";
+          replyText = "Contamos con bujías para mototaxi: Champion / Bosch y Original Originales para Bajaj 4T (S/ 12.00) y TVS King (S/ 14.00).";
         } else if (lower.includes("zapata") || lower.includes("pastilla") || lower.includes("freno")) {
-          replyText = "Tenemos zapatas y pastillas de freno libres de asbesto para Torito Bajaj y TVS King desde S/ 15.00 en Alternativo A1 y S/ 28.00 en OEM.";
+          replyText = "Tenemos zapatas y pastillas de freno libres de asbesto para Torito Bajaj y TVS King desde S/ 15.00 en Alternativo A1 y S/ 28.00 en Original.";
         } else if (lower.includes("embrague") || lower.includes("clutch") || lower.includes("disco")) {
-          replyText = "Disponemos de kits de discos de embrague (OEM Originales TVS/Bajaj y Alternativos A1 japoneses) con resortes reforzados para trabajo pesado.";
+          replyText = "Disponemos de kits de discos de embrague (Original Originales TVS/Bajaj y Alternativos A1 japoneses) con resortes reforzados para trabajo pesado.";
         } else if (lower.includes("cilindro") || lower.includes("piston") || lower.includes("pistón") || lower.includes("anillo")) {
-          replyText = "Contamos con kits de cilindro + pistón + anillos estándar y sobremedida para TVS King 200cc y Bajaj RE 205cc (OEM y Alternativo A1).";
+          replyText = "Contamos con kits de cilindro + pistón + anillos estándar y sobremedida para TVS King 200cc y Bajaj RE 205cc (Original y Alternativo A1).";
         } else if (lower.includes("precio") || lower.includes("cuanto") || lower.includes("cuánto") || lower.includes("costo")) {
           replyText = "Manejamos precios al por mayor y menor en Soles (S/) tanto en Original como en Alternativa A1. ¿Qué repuesto específico buscas para darte la cotización exacta?";
         } else if (lower.includes("envio") || lower.includes("delivery") || lower.includes("provincia")) {
           replyText = "Hacemos envíos diarios a todo el Perú: delivery express en Lima y despachos a provincias por agencias de carga (Shalom, Marvisur, Flores).";
         } else {
-          replyText = "¡Hola maestro! En HW Andevia tenemos stock completo de repuestos OEM Originales y Alternativos A1 para mototaxis TVS (King/Deluxe) y Bajaj (Torito 4T/Maxima). ¿Qué repuesto deseas consultar?";
+          replyText = "¡Hola maestro! En HW Andevia tenemos stock completo de repuestos Original Originales y Alternativos A1 para mototaxis TVS (King/Deluxe) y Bajaj (Torito 4T/Maxima). ¿Qué repuesto deseas consultar?";
         }
       }
 

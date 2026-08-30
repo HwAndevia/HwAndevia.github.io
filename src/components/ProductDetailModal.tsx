@@ -19,17 +19,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 }) => {
   if (!product) return null;
 
-  const [selectedQuality, setSelectedQuality] = useState<QualityTier>('OEM');
+  const [selectedQuality, setSelectedQuality] = useState<QualityTier>('Original');
   const [quantity, setQuantity] = useState<number>(1);
 
-  const currentPrice = selectedQuality === 'OEM' ? product.priceOEM : product.priceAlt;
-  const currentStock = selectedQuality === 'OEM' ? product.stockOEM : product.stockAlt;
-  const currentSku = selectedQuality === 'OEM' ? product.skuOEM : product.skuAlt;
+  const currentPrice = selectedQuality === 'Original' ? product.priceOriginal : product.priceAlt;
+  const currentStock = selectedQuality === 'Original' ? product.stockOriginal : product.stockAlt;
+  const currentSku = selectedQuality === 'Original' ? product.skuOriginal : product.skuAlt;
   const isOutOfStock = currentStock <= 0;
 
   const handleBuyWhatsApp = () => {
     if (isOutOfStock) return;
-    const qualityLabel = selectedQuality === 'OEM' ? 'Original' : 'Alternativa';
+    const qualityLabel = selectedQuality === 'Original' ? 'Original' : 'Alternativa';
     const msg = `Hola HW Andevia, deseo comprar ${quantity} unidad(es) de "${product.name}" (${qualityLabel}) por un total de S/ ${(currentPrice * quantity).toFixed(2)}.`;
     const safeUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber.replace(/\D/g, '')}&text=${encodeURIComponent(msg.normalize('NFC'))}`;
     window.open(safeUrl, '_blank');
@@ -98,22 +98,22 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 </label>
 
                 <div className="grid grid-cols-2 gap-2">
-                  {/* OEM Option */}
+                  {/* Original Option */}
                   <button
                     type="button"
-                    onClick={() => setSelectedQuality('OEM')}
+                    onClick={() => setSelectedQuality('Original')}
                     className={`p-3 rounded-xl border text-left transition-all ${
-                      selectedQuality === 'OEM'
+                      selectedQuality === 'Original'
                         ? 'bg-amber-50 border-amber-500 ring-2 ring-amber-400/50'
                         : 'bg-white border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
                       <ShieldCheck className="w-4 h-4 text-amber-600" />
-                      <span>Calidad OEM (Original)</span>
+                      <span>Calidad Original (Original)</span>
                     </div>
                     <div className="text-sm font-black text-slate-900 mt-1">
-                      S/ {product.priceOEM.toFixed(2)}
+                      S/ {product.priceOriginal.toFixed(2)}
                     </div>
                     <div className="text-[10px] text-amber-700 font-medium mt-0.5">
                       Garantía de Fábrica TVS/Bajaj

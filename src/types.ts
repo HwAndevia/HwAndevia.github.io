@@ -2,7 +2,7 @@ export type ProductCategory = string;
 
 export type ProductBrand = 'TVS' | 'Bajaj' | 'Universal' | string;
 
-export type QualityTier = 'OEM' | 'Alternativa';
+export type QualityTier = 'Original' | 'Alternativa';
 
 export interface Product {
   id: string;
@@ -14,12 +14,12 @@ export interface Product {
   imageUrl: string;
   
   // Quality pricing and stock
-  priceOEM: number;       // Price in Soles S/ for OEM Quality
+  priceOriginal: number;       // Price in Soles S/ for Original Quality
   priceAlt: number;       // Price in Soles S/ for Good Quality Alternative
-  stockOEM: number;       // Stock count for OEM
+  stockOriginal: number;       // Stock count for Original
   stockAlt: number;       // Stock count for Alternative
   
-  skuOEM?: string;
+  skuOriginal?: string;
   skuAlt?: string;
   brandAltName?: string;  // e.g. "Varroc / Suprajit / Endurance / Bosch"
   isFeatured?: boolean;

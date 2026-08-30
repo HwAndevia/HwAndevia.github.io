@@ -9,7 +9,7 @@ interface ChatIAModalProps {
   productContext?: {
     product: Product;
     quantity: number;
-    quality: 'OEM' | 'Alternativa';
+    quality: 'Original' | 'Alternativa';
   } | null;
   whatsappNumber?: string;
 }
@@ -184,13 +184,13 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
       
       const lower = userText.toLowerCase();
       if (lower.includes('filtro') && lower.includes('aceite')) {
-        errorResponse = '¡Sí maestro! Tenemos en stock filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (OEM: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de los dos modelos necesitas?';
+        errorResponse = '¡Sí maestro! Tenemos en stock filtros de aceite: para Torito Bajaj 4T / Maxima (Original: S/ 18.00 | Alternativo A1: S/ 10.00) y para TVS King Duramax 200 (Original: S/ 22.00 | Alternativo A1: S/ 12.00). ¿Para cuál de los dos modelos necesitas?';
       } else if (lower.includes('filtro') && lower.includes('aire')) {
-        errorResponse = '¡Sí maestro! Contamos con filtros de aire para Torito Bajaj 4T (OEM: S/ 25.00 | Alt: S/ 14.00) y TVS King 200 (OEM: S/ 28.00 | Alt: S/ 15.00).';
+        errorResponse = '¡Sí maestro! Contamos con filtros de aire para Torito Bajaj 4T (Original: S/ 25.00 | Alt: S/ 14.00) y TVS King 200 (Original: S/ 28.00 | Alt: S/ 15.00).';
       } else if (lower.includes('bujia') || lower.includes('bujía')) {
-        errorResponse = 'Disponemos de bujías Champion / Bosch y OEM originales para Bajaj 4T (S/ 12.00) y TVS King (S/ 14.00).';
+        errorResponse = 'Disponemos de bujías Champion / Bosch y Original originales para Bajaj 4T (S/ 12.00) y TVS King (S/ 14.00).';
       } else if (lower.includes('freno') || lower.includes('zapata') || lower.includes('pastilla')) {
-        errorResponse = 'Tenemos zapatas de freno traseras y delanteras de alta fricción para Torito Bajaj y TVS King desde S/ 15.00 en Alternativo A1 y S/ 28.00 en OEM.';
+        errorResponse = 'Tenemos zapatas de freno traseras y delanteras de alta fricción para Torito Bajaj y TVS King desde S/ 15.00 en Alternativo A1 y S/ 28.00 en Original.';
       } else if (err?.message === '429' || String(err).includes('429')) {
         errorResponse = 'Hemos alcanzado la cuota de consultas momentánea. Por favor, haz tu pedido directamente por WhatsApp para atenderte de inmediato.';
       } else {

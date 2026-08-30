@@ -16,7 +16,7 @@ interface BuyModalProps {
 export const BuyModal: React.FC<BuyModalProps> = ({
   isOpen,
   product,
-  initialQuality = 'OEM',
+  initialQuality = 'Original',
   onClose,
   onAddToCart,
   onOpenChatIA,
@@ -27,15 +27,15 @@ export const BuyModal: React.FC<BuyModalProps> = ({
   const [quality, setQuality] = useState<QualityTier>(initialQuality);
   const [quantity, setQuantity] = useState<number>(1);
 
-  const price = quality === 'OEM' ? product.priceOEM : product.priceAlt;
-  const stock = quality === 'OEM' ? product.stockOEM : product.stockAlt;
-  const sku = quality === 'OEM' ? product.skuOEM : product.skuAlt;
+  const price = quality === 'Original' ? product.priceOriginal : product.priceAlt;
+  const stock = quality === 'Original' ? product.stockOriginal : product.stockAlt;
+  const sku = quality === 'Original' ? product.skuOriginal : product.skuAlt;
   const isOutOfStock = stock <= 0;
   const totalPrice = price * quantity;
 
   const handleWhatsAppBuy = () => {
     if (isOutOfStock) return;
-    const qualityLabel = quality === 'OEM' ? 'Original' : 'Alternativa A1';
+    const qualityLabel = quality === 'Original' ? 'Original' : 'Alternativa A1';
     const skuLine = sku ? `\n🔢 SKU: ${sku}` : '';
     const msg = `Hola HW Andevia, deseo comprar el siguiente repuesto:
 📌 Producto: ${product.name}
@@ -128,18 +128,18 @@ export const BuyModal: React.FC<BuyModalProps> = ({
               </div>
             </div>
 
-            {/* SELECCIÓN DE CALIDAD (OEM vs ALTERNATIVA) */}
+            {/* SELECCIÓN DE CALIDAD (Original vs ALTERNATIVA) */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 tracking-wider mb-2">
                 1. Selecciona la Calidad del Repuesto:
               </label>
               <div className="grid grid-cols-2 gap-2.5">
-                {/* Opción OEM */}
+                {/* Opción Original */}
                 <button
                   type="button"
-                  onClick={() => setQuality('OEM')}
+                  onClick={() => setQuality('Original')}
                   className={`p-3 rounded-xl border-2 text-left transition-all relative ${
-                    quality === 'OEM'
+                    quality === 'Original'
                       ? 'border-amber-500 bg-amber-50/60 shadow-md'
                       : 'border-slate-200 bg-white hover:border-slate-300'
                   }`}
@@ -149,16 +149,16 @@ export const BuyModal: React.FC<BuyModalProps> = ({
                       <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
                       Original
                     </span>
-                    {quality === 'OEM' && (
+                    {quality === 'Original' && (
                       <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
                     )}
                   </div>
                   <div className="text-base font-extrabold text-slate-900">
-                    S/ {product.priceOEM.toFixed(2)}
+                    S/ {product.priceOriginal.toFixed(2)}
                   </div>
                   <div className="text-[10px] font-semibold mt-1">
-                    {product.stockOEM > 0 ? (
-                      <span className="text-emerald-700">Stock: {product.stockOEM} und</span>
+                    {product.stockOriginal > 0 ? (
+                      <span className="text-emerald-700">Stock: {product.stockOriginal} und</span>
                     ) : (
                       <span className="text-red-600 font-bold">Agotado</span>
                     )}
