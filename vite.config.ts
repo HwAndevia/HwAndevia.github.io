@@ -18,6 +18,7 @@ export default defineConfig(() => {
         hostname: 'https://hwandevia.github.io',
         // Opcional: Genera automáticamente un archivo robots.txt básico
         generateRobotsTxt: true, 
+        exclude: ['/google9b04b0605aa2d077', '/standalone_'], 
       })
     ],
     resolve: {
