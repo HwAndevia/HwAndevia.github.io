@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingCart, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import { ShoppingCart, Search, Sparkles } from 'lucide-react';
 import { ProductBrand, StoreSettings } from '../types';
 import { Logo } from './Logo';
 
@@ -13,10 +13,10 @@ interface NavbarProps {
   cartTotal: number;
   onOpenCart: () => void;
   onOpenChatIA?: () => void;
+  isHighlightCart?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  settings,
   selectedBrand,
   onSelectBrand,
   searchQuery,
@@ -25,6 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   cartTotal,
   onOpenCart,
   onOpenChatIA,
+  isHighlightCart = false,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 shadow-xl text-white">
@@ -49,6 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => onSearchChange('')}
                 className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-white bg-slate-700 px-1.5 py-0.5 rounded"
               >
@@ -61,6 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-2.5">
             {/* Chat con IA 24/7 */}
             <button
+              type="button"
               onClick={onOpenChatIA}
               className="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-black px-3 py-2 rounded-xl text-xs shadow-md transition-all active:scale-95 border border-orange-400"
               title="Asistente Virtual IA 24/7"
@@ -71,8 +74,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Shopping Cart Button */}
             <button
+              id="navbar-cart-btn"
+              type="button"
               onClick={onOpenCart}
-              className="relative flex items-center gap-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-lg hover:shadow-red-900/40 transition-all active:scale-95"
+              className={`relative flex items-center gap-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-lg transition-all active:scale-95 ${
+                isHighlightCart
+                  ? 'ring-4 ring-amber-400 shadow-2xl shadow-red-600/60 scale-105 z-50'
+                  : 'hover:shadow-red-900/40'
+              }`}
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5" />
@@ -84,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
               <div className="hidden sm:flex flex-col items-start leading-none text-left">
                 <span className="text-[10px] text-red-200 uppercase font-semibold">Mi Carrito</span>
-                <span className="text-sm font-black">S/ {cartTotal.toFixed(2)}</span>
+                <span className="text-sm font-black">S/ {(cartTotal || 0).toFixed(2)}</span>
               </div>
             </button>
           </div>
@@ -109,6 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span className="text-xs font-semibold text-slate-400 whitespace-nowrap mr-1">Marca:</span>
           
           <button
+            type="button"
             onClick={() => onSelectBrand('Todos')}
             className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
               selectedBrand === 'Todos'
@@ -120,6 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onSelectBrand('TVS')}
             className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
               selectedBrand === 'TVS'
@@ -132,6 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onSelectBrand('Bajaj')}
             className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
               selectedBrand === 'Bajaj'
@@ -144,6 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onSelectBrand('Universal')}
             className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
               selectedBrand === 'Universal'

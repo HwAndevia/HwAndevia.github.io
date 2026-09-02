@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Phone } from 'lucide-react';
-import { buildWhatsAppUrl } from '../utils/Whatsapp.ts';
+import { buildWhatsAppUrl } from '../utils/Whatsapp';
 
 export interface WhatsAppButtonProps {
   /** Número de teléfono con código de país (ej. "51980722382" o "+51 980 722 382") */
@@ -19,7 +19,7 @@ export interface WhatsAppButtonProps {
  * Componente funcional reutilizable para abrir WhatsApp de forma segura.
  * Aplica normalización Unicode NFC y encodeURIComponent para evitar que
  * los acentos (á, é, í, ó, ú), la letra 'ñ' y los emojis (🏍️, 🛒) se conviertan
- * en caracteres de reemplazo ().
+ * en caracteres de reemplazo.
  */
 export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   whatsappNumber = '51980722382',
@@ -57,4 +57,3 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
 };
 
 export default WhatsAppButton;
-

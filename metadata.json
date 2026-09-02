@@ -1,6 +1,8 @@
 {
-  "name": "HW-Andevia",
-  "description": "Tienda virtual de repuestos para mototaxis TVS y Torito Bajaj con catálogo categorizado por calidad Original y alternativa, y sistema de pedidos por WhatsApp.",
+  "name": "Remix HW Andevia",
+  "description": "Tienda virtual de repuestos para mototaxis TVS y Torito Bajaj con catálogo categorizado por calidad OEM y alternativa, y sistema de pedidos por WhatsApp.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

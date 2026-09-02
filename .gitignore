@@ -1,11 +1,31 @@
+# --- Tus carpetas y archivos específicos ---
 node_modules/
 build/
 dist/
 coverage/
 .DS_Store
 *.log
+admin.py
+cloudrun_chat
+reportes.py
+
+# --- Variables de entorno (Seguridad: Nunca subas tus contraseñas/llaves) ---
 .env
 .env.local
 .env.*.local
-admin.py
-cloudrun_chat
+
+# --- Archivos esenciales de Python (Evita conflictos en tu editor) ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.pypy/
+
+# --- Entornos virtuales de Python ---
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/

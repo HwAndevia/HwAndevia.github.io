@@ -5,7 +5,7 @@ const DEFAULT_SETTINGS: StoreSettings = {
   storeName: 'HW ANDEVIA IMPORT - Repuestos TVS & Torito Bajaj',
   subtitle: 'Especialistas en repuestos originales y alternativos para mototaxis',
   phone: '+51 980 722 382',
-  address:'',
+  address: 'Av. Nicolás Ayllón, Lima, Perú',
   city: 'Lima, Perú',
   yapeNumber: '980 722 382',
   plinNumber: '980 722 382',
@@ -18,7 +18,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
   const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
   const timestamp = Date.now();
 
-  // Posibles rutas para garantizar compatibilidad con dev, prod, GitHub Pages, previews y API Express
+  // Posibles rutas para garantizar compatibilidad con dev, prod, previews y static hosting
   const endpoints = [
     `${cleanBase}productos.json?v=${timestamp}`,
     `/productos.json?v=${timestamp}`,
@@ -39,14 +39,45 @@ export const fetchProducts = async (): Promise<Product[]> => {
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
-          return data.map((p, idx) => ({
-            ...p,
-            id: p.id || `p-${idx + 1}`
-          }));
+          return data.map((p: any, idx: number): Product => {
+            const priceOrig = Number(p.priceOriginal ?? p.priceOEM ?? p.price ?? p.priceMenor ?? 0);
+            const priceAlternative = Number(p.priceAlt ?? p.priceAlternative ?? (priceOrig > 0 ? Math.round(priceOrig * 0.6) : 0));
+            const priceMayorOrig = Number(p.priceMayorOriginal ?? p.priceMayorOEM ?? p.priceMayor ?? (priceOrig > 0 ? Math.round(priceOrig * 0.85) : 0));
+            const priceMayorAlternative = Number(p.priceMayorAlt ?? (priceAlternative > 0 ? Math.round(priceAlternative * 0.85) : 0));
+            const stockOrig = Number(p.stockOriginal ?? p.stockOEM ?? p.stock ?? 10);
+            const stockAlternative = Number(p.stockAlt ?? p.stockAlternative ?? 15);
+            const cleanSku = String(p.sku || p.skuOriginal || `SKU-${idx + 1}`);
+
+            return {
+              id: String(p.id || `p-${idx + 1}`),
+              name: String(p.name || 'Repuesto Mototaxi'),
+              brand: p.brand || 'Universal',
+              modelCompatibility: String(p.modelCompatibility || 'TVS King / Torito Bajaj'),
+              category: String(p.category || 'General'),
+              description: String(p.description || `Repuesto para mototaxi ${p.brand || ''} ${p.modelCompatibility || ''}.`),
+              imageUrl: String(p.imageUrl || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600'),
+              priceOriginal: priceOrig,
+              priceOEM: priceOrig,
+              priceAlt: priceAlternative,
+              priceMayorOriginal: priceMayorOrig,
+              priceMayorOEM: priceMayorOrig,
+              priceMayorAlt: priceMayorAlternative,
+              priceMenor: priceOrig,
+              priceMayor: priceMayorOrig,
+              stockOriginal: stockOrig,
+              stockOEM: stockOrig,
+              stockAlt: stockAlternative,
+              sku: cleanSku,
+              skuOriginal: cleanSku,
+              skuAlt: cleanSku,
+              brandAltName: p.brandAltName || 'Marca Certificada A1',
+              isFeatured: Boolean(p.isFeatured),
+              specifications: p.specifications || {}
+            };
+          });
         }
       }
     } catch {
-      // Intentar la siguiente ruta
       continue;
     }
   }
