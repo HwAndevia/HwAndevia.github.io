@@ -220,12 +220,12 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 flex flex-col h-[600px] max-h-[90vh] overflow-hidden"
+          className="bg-slate-900 w-full max-w-lg rounded-2xl shadow-2xl border border-slate-800 flex flex-col h-[600px] max-h-[90vh] overflow-hidden"
         >
           {/* HEADER DEL CHAT */}
-          <div className="bg-slate-900 text-white p-4 flex items-center justify-between shrink-0 border-b border-slate-800">
+          <div className="bg-slate-950 text-white p-4 flex items-center justify-between shrink-0 border-b border-slate-800">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white p-0.5 border border-amber-400/40 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
+              <div className="w-10 h-10 rounded-xl bg-slate-950 p-0.5 border border-amber-400/40 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
                 <img
                   src="/Logoimport.jpg"
                   alt="HW ANDEVIA Logo"
@@ -250,7 +250,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
             <div className="flex items-center gap-1.5">
               <button
                 onClick={handleResetSession}
-                className="flex items-center gap-1 text-[11px] font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1.5 rounded-lg transition-colors border border-slate-700"
+                className="flex items-center gap-1 text-[11px] font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1.5 rounded-lg transition-colors border border-slate-700 cursor-pointer"
                 title="Reiniciar chat y comenzar nueva consulta"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -258,7 +258,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
               </button>
               <button
                 onClick={onClose}
-                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors"
+                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
                 title="Cerrar chat"
               >
                 <X className="w-5 h-5" />
@@ -268,12 +268,12 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
 
           {/* BANNER FRENO DE MANO 2: LÍMITE DIARIO (> 1450 CONSULTAS) */}
           {isDailyLimitActive && (
-            <div className="bg-amber-500/10 border-b border-amber-500/20 p-4 text-center shrink-0 flex flex-col items-center justify-center space-y-2">
-              <div className="flex items-center gap-2 text-amber-700 font-bold text-sm">
-                <Moon className="w-5 h-5 text-amber-600 animate-bounce" />
+            <div className="bg-amber-950/40 border-b border-amber-800/40 p-4 text-center shrink-0 flex flex-col items-center justify-center space-y-2">
+              <div className="flex items-center gap-2 text-amber-300 font-bold text-sm">
+                <Moon className="w-5 h-5 text-amber-400 animate-bounce" />
                 <span>Nuestro asistente virtual está descansando.</span>
               </div>
-              <p className="text-xs text-slate-600 max-w-sm">
+              <p className="text-xs text-slate-300 max-w-sm">
                 Por favor, haz tu pedido directamente por WhatsApp para atenderte sin demoras.
               </p>
               <a
@@ -289,7 +289,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
           )}
 
           {/* AREA DE MENSAJES */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50/50">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-950">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -300,20 +300,20 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
                 <div
                   className={`max-w-[85%] rounded-2xl p-3.5 text-xs leading-relaxed shadow-sm ${
                     msg.sender === 'user'
-                      ? 'bg-slate-900 text-white rounded-br-xs font-medium'
+                      ? 'bg-slate-800 text-white border border-slate-700 rounded-br-xs font-medium'
                       : msg.sender === 'ia'
-                      ? 'bg-white border border-slate-200 text-slate-800 rounded-bl-xs'
-                      : 'bg-amber-100 border border-amber-300 text-amber-900 rounded-xl'
+                      ? 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-xs'
+                      : 'bg-amber-950/70 border border-amber-800/70 text-amber-200 rounded-xl'
                   }`}
                 >
                   {msg.sender === 'ia' && (
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-orange-600 mb-1 flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-orange-500" />
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-orange-400 mb-1 flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-orange-400" />
                       <span>HW Andevia IA</span>
                     </div>
                   )}
                   <p className="whitespace-pre-wrap">{msg.text}</p>
-                  <span className="text-[9px] opacity-60 block text-right mt-1 font-mono">
+                  <span className="text-[9px] text-slate-400 block text-right mt-1 font-mono">
                     {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
@@ -322,8 +322,8 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white border border-slate-200 p-3 rounded-2xl rounded-bl-xs text-xs text-slate-500 flex items-center gap-2 shadow-sm">
-                  <RefreshCw className="w-4 h-4 animate-spin text-orange-500" />
+                <div className="bg-slate-900 border border-slate-800 p-3 rounded-2xl rounded-bl-xs text-xs text-slate-300 flex items-center gap-2 shadow-sm">
+                  <RefreshCw className="w-4 h-4 animate-spin text-orange-400" />
                   <span>Analizando compatibilidad y stock...</span>
                 </div>
               </div>
@@ -334,12 +334,12 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-amber-800 text-xs flex items-center gap-2.5 shadow-sm"
+                className="bg-amber-950/40 border border-amber-800/50 rounded-xl p-3 text-amber-200 text-xs flex items-center gap-2.5 shadow-sm"
               >
-                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 animate-pulse" />
+                <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 animate-pulse" />
                 <div>
-                  <span className="font-bold block">Asistente ocupado...</span>
-                  <p className="text-[11px] text-amber-700 leading-tight">
+                  <span className="font-bold block text-amber-300">Asistente ocupado...</span>
+                  <p className="text-[11px] text-amber-200/90 leading-tight">
                     Hay muchas consultas simultáneas en este momento. Por favor espera unos segundos para hacer tu siguiente pregunta.
                   </p>
                 </div>
@@ -351,12 +351,12 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center space-y-2 shadow-md my-2"
+                className="bg-emerald-950/40 border border-emerald-800/50 rounded-2xl p-4 text-center space-y-2 shadow-md my-2"
               >
-                <div className="text-emerald-800 font-bold text-sm">
+                <div className="text-emerald-300 font-bold text-sm">
                   ¡5 consultas completadas en esta sesión!
                 </div>
-                <p className="text-xs text-emerald-700 leading-relaxed">
+                <p className="text-xs text-emerald-200/90 leading-relaxed">
                   Para coordinar pedidos y entregas directas puedes ir a WhatsApp, o si deseas hacer más preguntas sobre otros repuestos, pulsa en iniciar nueva consulta.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 pt-1">
@@ -371,9 +371,9 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
                   </a>
                   <button
                     onClick={handleResetSession}
-                    className="inline-flex items-center justify-center gap-1.5 flex-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold py-2.5 px-3 rounded-xl text-xs shadow-sm transition-all active:scale-95"
+                    className="inline-flex items-center justify-center gap-1.5 flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-2.5 px-3 rounded-xl text-xs shadow-sm transition-all active:scale-95 cursor-pointer"
                   >
-                    <RotateCcw className="w-3.5 h-3.5 text-orange-500" />
+                    <RotateCcw className="w-3.5 h-3.5 text-orange-400" />
                     <span>Hacer otra consulta</span>
                   </button>
                 </div>
@@ -382,9 +382,9 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
           </div>
 
           {/* FOOTER / INPUT */}
-          <div className="p-3 bg-white border-t border-slate-200 shrink-0">
+          <div className="p-3 bg-slate-900 border-t border-slate-800 shrink-0">
             {isDailyLimitActive ? (
-              <div className="text-center py-2 text-xs text-slate-500 font-medium">
+              <div className="text-center py-2 text-xs text-slate-400 font-medium">
                 Atención habilitada exclusivamente por WhatsApp.
               </div>
             ) : isUserLimitReached ? (
@@ -400,7 +400,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
                 </a>
                 <button
                   onClick={handleResetSession}
-                  className="px-4 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md transition-all"
+                  className="px-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5 text-orange-400" />
                   <span>Nueva Consulta</span>
@@ -418,17 +418,17 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
                       : 'Escribe tu pregunta sobre el repuesto...'
                   }
                   disabled={isLoading || isMinuteLimitActive}
-                  className="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 />
 
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim() || isMinuteLimitActive}
-                  className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-all shadow-md active:scale-95 ${
+                  className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer ${
                     isMinuteLimitActive
-                      ? 'bg-slate-600 text-slate-300 animate-pulse cursor-not-allowed'
+                      ? 'bg-slate-800 text-slate-500 border border-slate-700 animate-pulse cursor-not-allowed'
                       : isLoading || !input.trim()
-                      ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300 shadow-none'
+                      ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed shadow-none'
                       : 'bg-orange-500 hover:bg-orange-400 text-slate-950 font-extrabold shadow-orange-500/20'
                   }`}
                 >
@@ -440,7 +440,7 @@ export const ChatIA: React.FC<ChatIAModalProps> = ({
 
             <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 px-1 font-mono">
               <span>Sesión: {userQuestionsCount}/5 preguntas</span>
-              <span className={isMinuteLimitActive ? 'text-amber-600 font-bold' : ''}>
+              <span className={isMinuteLimitActive ? 'text-amber-400 font-bold' : ''}>
                 Carga min: {clicksUltimoMinuto}/12
               </span>
             </div>

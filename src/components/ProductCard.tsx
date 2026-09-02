@@ -21,7 +21,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const stockOriginal = Number(product.stockOriginal ?? product.stockOEM ?? 0);
   const stockAlt = Number(product.stockAlt ?? 0);
 
-  const currentPrice = selectedQuality === 'Original' ? priceOriginal : priceAlt;
   const currentStock = selectedQuality === 'Original' ? stockOriginal : stockAlt;
   const isOutOfStock = currentStock <= 0;
 
@@ -37,10 +36,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
-      {/* Top Image Container */}
+    <div className="group bg-slate-950 rounded-2xl border border-slate-800/90 shadow-lg shadow-black/40 hover:shadow-2xl hover:border-slate-700 transition-all duration-300 flex flex-col overflow-hidden relative">
+      {/* Top Image Container - Más achatada (aspect-[2.8/1] max-h-36) */}
       <div 
-        className="relative aspect-4/3 bg-slate-100 overflow-hidden cursor-pointer" 
+        className="relative aspect-[2.8/1] max-h-36 bg-slate-900 overflow-hidden cursor-pointer" 
         onClick={() => onOpenDetail(product, selectedQuality)}
       >
         <img
@@ -54,12 +53,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
 
         {/* Brand Badge */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center">
-          <span className={`text-[11px] font-normal uppercase px-2.5 py-1 rounded-lg shadow-md border ${brandColors[product.brand as keyof typeof brandColors] || 'bg-slate-800 text-white'}`}>
+        <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1 items-center">
+          <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-md shadow-md border ${brandColors[product.brand as keyof typeof brandColors] || 'bg-slate-800 text-white'}`}>
             {product.brand === 'Bajaj' ? 'Torito Bajaj' : product.brand}
           </span>
           {product.isFeatured && (
-            <span className="bg-amber-400 text-slate-950 font-normal text-[10px] uppercase px-2 py-1 rounded-lg shadow-md">
+            <span className="bg-amber-400 text-slate-950 font-bold text-[9px] uppercase px-1.5 py-0.5 rounded-md shadow-md">
               Destacado
             </span>
           )}
@@ -67,52 +66,52 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Card Content Body */}
-      <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+      <div className="p-3.5 flex-1 flex flex-col justify-between space-y-2.5">
         <div>
           {/* Category & Compatibility */}
-          <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
-            <span className="font-normal text-red-600 uppercase tracking-wider text-[11px]">
+          <div className="flex items-center justify-between text-xs mb-1">
+            <span className="font-bold text-red-400 uppercase tracking-wider text-[11px]">
               {product.category}
             </span>
             {singleModel && (
-              <span className="font-normal text-slate-800 uppercase tracking-wider text-[13px] truncate max-w-[55%]" title={singleModel}>
+              <span className="font-medium text-slate-300 uppercase tracking-wider text-[11px] truncate max-w-[55%]" title={singleModel}>
                 {singleModel}
               </span>
             )}
           </div>
 
-          {/* Title */}
+          {/* Title - en Bold y Texto Blanco */}
           <h3
             onClick={() => onOpenDetail(product, selectedQuality)}
-            className="font-semibold text-slate-900 text-base leading-snug line-clamp-2 hover:text-red-600 cursor-pointer transition-colors"
+            className="font-bold text-white text-sm sm:text-base leading-snug line-clamp-2 hover:text-red-400 cursor-pointer transition-colors"
             title={product.name}
           >
             {product.name}
           </h3>
         </div>
 
-        {/* QUALITY SELECTOR (Original vs Alternative) - Estilo ProductDetailModal */}
-        <div className="pt-0.2">
-          <div className="grid grid-cols-2 gap-2">
+        {/* QUALITY SELECTOR (Original vs Alternative) */}
+        <div className="pt-0.5">
+          <div className="grid grid-cols-2 gap-1.5">
             {/* Original Option */}
             <button
               type="button"
               onClick={() => setSelectedQuality('Original')}
-              className={`p-2.5 rounded-xl border text-left transition-all ${
+              className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                 selectedQuality === 'Original'
-                  ? 'bg-amber-50 border-amber-500 ring-2 ring-amber-400/50 shadow-xs'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
+                  ? 'bg-amber-950/60 border-amber-500 ring-2 ring-amber-400/40 shadow-xs'
+                  : 'bg-slate-900/90 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
               }`}
             >
-              <div className="flex items-center gap-1.5 text-xs font-normal text-amber-900">
-                <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
+              <div className="flex items-center gap-1 text-[11px] font-bold text-amber-300">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>Original</span>
               </div>
-              <div className="text-base font-semibold text-slate-900 mt-1">
+              <div className="text-sm sm:text-base font-bold text-white mt-0.5">
                 S/ {(priceOriginal || 0).toFixed(2)}
               </div>
-              <div className="text-[10px] font-normal mt-0.5 flex items-center justify-between">
-                <span className="text-amber-800">
+              <div className="text-[10px] font-medium mt-0.5 flex items-center justify-between">
+                <span className={stockOriginal > 0 ? 'text-amber-200' : 'text-red-400 font-semibold'}>
                   {stockOriginal > 0 ? `Stock: ${stockOriginal}` : 'Agotado'}
                 </span>
               </div>
@@ -122,21 +121,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <button
               type="button"
               onClick={() => setSelectedQuality('Alternativa')}
-              className={`p-2.5 rounded-xl border text-left transition-all ${
+              className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                 selectedQuality === 'Alternativa'
-                  ? 'bg-blue-50 border-blue-500 ring-2 ring-blue-400/50 shadow-xs'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
+                  ? 'bg-blue-800/85 border-blue-400 ring-2 ring-blue-400 shadow-md shadow-blue-950/60'
+                  : 'bg-slate-900/90 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
               }`}
             >
-              <div className="flex items-center gap-1.5 text-xs font-normal text-blue-900">
-                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+              <div className="flex items-center gap-1 text-[11px] font-bold text-blue-200">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-300 shrink-0" />
                 <span>Alternativa</span>
               </div>
-              <div className="text-base font-semibold text-slate-900 mt-1">
+              <div className="text-sm sm:text-base font-bold text-white mt-0.5">
                 S/ {(priceAlt || 0).toFixed(2)}
               </div>
-              <div className="text-[10px] font-normal mt-0.5 flex items-center justify-between">
-                <span className="text-blue-800">
+              <div className="text-[10px] font-medium mt-0.5 flex items-center justify-between">
+                <span className={stockAlt > 0 ? 'text-blue-200' : 'text-red-400 font-semibold'}>
                   {stockAlt > 0 ? `Stock: ${stockAlt}` : 'Agotado'}
                 </span>
               </div>
@@ -144,40 +143,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Price & Primary Comprar Button */}
-        <div className="flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
-          <div>
-            <span className="text-[12px] text-slate-500 block font-normal leading-none">
-              Precio ({selectedQuality})
-            </span>
-            <div className="text-[18px] font-semibold text-slate-900 tracking-tight mt-0.5">
-              S/ {(currentPrice || 0).toFixed(2)}
-            </div>
-            {/* Stock indicator */}
-            <div className="text-[12px] font-normal mt-0.5">
-              {isOutOfStock ? (
-                <span className="text-red-600">Agotado</span>
-              ) : (
-                <span className="text-emerald-700">
-                  {currentStock} disponibles
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* BOTÓN COMPRAR -> Abre el modal de detalle con la calidad seleccionada */}
+        {/* BOTÓN COMPRAR -> Ancho completo de la tarjeta */}
+        <div className="pt-1.5 border-t border-slate-800/80 mt-1">
           <button
             type="button"
             disabled={isOutOfStock}
             onClick={() => onOpenDetail(product, selectedQuality)}
-            className={`flex items-center gap-1 font-normal px-4 py-2.5 rounded-xl transition-all shadow-md active:scale-95 text-xs ${
+            className={`w-full flex items-center justify-center gap-1.5 font-bold py-2.5 px-3 rounded-xl transition-all shadow-md active:scale-[0.98] text-xs sm:text-sm ${
               isOutOfStock
-                ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white hover:shadow-emerald-600/30 uppercase tracking-wide'
+                ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
+                : 'bg-orange-600 hover:bg-orange-500 text-white hover:shadow-orange-600/30 uppercase tracking-wider cursor-pointer shadow-md shadow-orange-950/40'
             }`}
           >
             <ShoppingCart className="w-4 h-4" />
-            <span>Comprar</span>
+            <span>{isOutOfStock ? 'Agotado' : 'Comprar'}</span>
           </button>
         </div>
 

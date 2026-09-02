@@ -7,7 +7,6 @@ import {
 
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
-import { CategoryFilter } from './components/CategoryFilter';
 import { ProductCard } from './components/ProductCard';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer, getCartItemPriceInfo } from './components/CartDrawer';
@@ -43,6 +42,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'Todas'>('Todas');
   const [selectedQuality, setSelectedQuality] = useState<QualityTier | 'Todas'>('Todas');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showCategories, setShowCategories] = useState<boolean>(false);
 
   // Cart State
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -155,6 +155,7 @@ export default function App() {
           p.brand || '',
           p.category || '',
           p.modelCompatibility || '',
+          p.description || '',
           p.brandAltName || '',
           p.sku || '',
           p.skuOriginal || '',
@@ -395,115 +396,101 @@ export default function App() {
       {/* Hero Banner (hidden during active search to maximize product visibility) */}
       {!searchQuery.trim() && (
         <HeroBanner
-          onSelectBrand={(brand) => {
-            setSelectedBrand(brand);
-            scrollToProducts();
-          }}
+          selectedBrand={selectedBrand}
+          onSelectBrand={(brand) => setSelectedBrand(brand)}
           onScrollToProducts={scrollToProducts}
         />
       )}
 
-      {/* Sticky Category & Quality Filter Bar */}
-      <CategoryFilter
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-        selectedQuality={selectedQuality}
-        onSelectQuality={setSelectedQuality}
-        categoryCounts={categoryCounts}
-      />
-
       {/* Main Product Catalog Section */}
-      <main id="catalog-section" className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        
-        {/* Catalog Section Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 pb-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-                Catálogo de Repuestos
-              </h2>
-              <span className="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-red-200">
-                {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
-              </span>
-            </div>
-          </div>
-
-          {/* Active Filters Reset */}
+      <section id="catalog-section" className="bg-slate-800 flex-1 w-full py-4 sm:py-5 transition-colors">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 space-y-4">
+          
+          {/* Barra discreta si hay filtros o búsqueda activos */}
           {(selectedBrand !== 'Todos' || selectedCategory !== 'Todas' || selectedQuality !== 'Todas' || searchQuery) && (
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedBrand('Todos');
-                setSelectedCategory('Todas');
-                setSelectedQuality('Todas');
-                setSearchQuery('');
-              }}
-              className="text-xs font-bold text-red-600 hover:text-red-700 hover:underline flex items-center gap-1"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Limpiar todos los filtros</span>
-            </button>
-          )}
-        </div>
-
-        {/* Loading / Error States */}
-        {loading ? (
-          <div className="py-20 text-center space-y-3">
-            <Loader2 className="w-10 h-10 animate-spin text-red-600 mx-auto" />
-            <p className="text-sm font-bold text-slate-600">Cargando catálogo de repuestos...</p>
-          </div>
-        ) : error ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-2xl text-center space-y-3">
-            <p className="font-bold text-sm">{error}</p>
-            <button
-              type="button"
-              onClick={loadData}
-              className="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl"
-            >
-              Reintentar
-            </button>
-          </div>
-        ) : filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-4 shadow-xs">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400">
-              <Sparkles className="w-8 h-8" />
+            <div className="flex items-center justify-between bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-700">
+              <span className="text-xs text-slate-300 font-medium">
+                {searchQuery ? (
+                  <>Resultados para: <strong className="text-amber-300 font-bold">"{searchQuery}"</strong> ({filteredProducts.length} repuestos)</>
+                ) : (
+                  <>Filtro aplicado ({filteredProducts.length} repuestos)</>
+                )}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedBrand('Todos');
+                  setSelectedCategory('Todas');
+                  setSelectedQuality('Todas');
+                  setSearchQuery('');
+                }}
+                className="text-xs font-bold text-red-400 hover:text-red-300 hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Limpiar filtros</span>
+              </button>
             </div>
-            <h3 className="font-black text-slate-800 text-lg">
-              No encontramos repuestos en esta categoría
-            </h3>
-            <p className="text-xs text-slate-500 max-w-md mx-auto">
-              Prueba cambiando la marca (TVS / Torito Bajaj), la categoría de repuestos o el término de búsqueda.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedBrand('Todos');
-                setSelectedCategory('Todas');
-                setSelectedQuality('Todas');
-                setSearchQuery('');
-              }}
-              className="bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-slate-800 transition-colors"
-            >
-              Ver todos los repuestos
-            </button>
-          </div>
-        ) : (
-          /* Product Grid */
-          <div className="max-w-7xl mx-auto px-0 md:px-12 lg:px-20 xl:px-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={handleAddToCart}
-                onOpenDetail={handleOpenDetail}
-                onOpenChatIA={(p, qual, qty) => handleOpenChatIA(p, qual, qty)}
-                whatsappNumber={settings.whatsappNumber}
-              />
-            ))}
-          </div>
-        )}
+          )}
 
-      </main>
+          {/* Loading / Error States */}
+          {loading ? (
+            <div className="py-20 text-center space-y-3">
+              <Loader2 className="w-10 h-10 animate-spin text-red-500 mx-auto" />
+              <p className="text-sm font-bold text-slate-300">Cargando catálogo de repuestos...</p>
+            </div>
+          ) : error ? (
+            <div className="bg-red-950/60 border border-red-800 text-red-200 p-6 rounded-2xl text-center space-y-3">
+              <p className="font-bold text-sm">{error}</p>
+              <button
+                type="button"
+                onClick={loadData}
+                className="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-red-500"
+              >
+                Reintentar
+              </button>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="bg-slate-900/90 rounded-2xl border border-slate-700 p-12 text-center space-y-4 shadow-lg">
+              <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto text-slate-400 border border-slate-700">
+                <Sparkles className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-white text-lg">
+                No encontramos repuestos en esta categoría
+              </h3>
+              <p className="text-xs text-slate-400 max-w-md mx-auto">
+                Prueba cambiando la marca (TVS / Torito Bajaj), la categoría de repuestos o el término de búsqueda.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedBrand('Todos');
+                  setSelectedCategory('Todas');
+                  setSelectedQuality('Todas');
+                  setSearchQuery('');
+                }}
+                className="bg-slate-800 text-white border border-slate-600 text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-slate-700 transition-colors"
+              >
+                Ver todos los repuestos
+              </button>
+            </div>
+          ) : (
+            /* Product Grid - 1 columna en teléfonos, 2 columnas desde tablet (sm) en adelante */
+            <div id="grid-productos" className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={handleAddToCart}
+                  onOpenDetail={handleOpenDetail}
+                  onOpenChatIA={(p, qual, qty) => handleOpenChatIA(p, qual, qty)}
+                  whatsappNumber={settings.whatsappNumber}
+                />
+              ))}
+            </div>
+          )}
+
+        </div>
+      </section>
 
       {/* Footer */}
       <Footer

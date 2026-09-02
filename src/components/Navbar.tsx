@@ -65,10 +65,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenChatIA}
-              className="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-400 text-slate-950 font-black px-3 py-2 rounded-xl text-xs shadow-md transition-all active:scale-95 border border-orange-400"
+              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-orange-400 hover:text-orange-300 font-bold px-3 py-2 rounded-xl text-xs shadow-md transition-all active:scale-95 border border-orange-500/80 hover:border-orange-400 cursor-pointer"
               title="Asistente Virtual IA 24/7"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-orange-400" />
               <span className="hidden sm:inline">Asistente IA</span>
             </button>
 
@@ -111,61 +111,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           </div>
-        </div>
-
-        {/* Brand Selector Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none border-t border-slate-800/80">
-          <span className="text-xs font-semibold text-slate-400 whitespace-nowrap mr-1">Marca:</span>
-          
-          <button
-            type="button"
-            onClick={() => onSelectBrand('Todos')}
-            className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-              selectedBrand === 'Todos'
-                ? 'bg-slate-100 text-slate-900 shadow-md scale-105'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
-            }`}
-          >
-            Todas las Marcas
-          </button>
-
-          <button
-            type="button"
-            onClick={() => onSelectBrand('TVS')}
-            className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-              selectedBrand === 'TVS'
-                ? 'bg-red-600 text-white shadow-md shadow-red-900/50 scale-105'
-                : 'bg-slate-800 text-slate-300 hover:bg-red-950/60 hover:text-red-300 border border-red-900/40'
-            }`}
-          >
-            <span className="w-2 h-2 rounded-full bg-red-400"></span>
-            TVS King (Deluxe / Duramax)
-          </button>
-
-          <button
-            type="button"
-            onClick={() => onSelectBrand('Bajaj')}
-            className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-              selectedBrand === 'Bajaj'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-900/50 scale-105'
-                : 'bg-slate-800 text-slate-300 hover:bg-blue-950/60 hover:text-blue-300 border border-blue-900/40'
-            }`}
-          >
-            <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-            Torito Bajaj (2T / 4T / Maxima)
-          </button>
-
-          <button
-            type="button"
-            onClick={() => onSelectBrand('Universal')}
-            className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-              selectedBrand === 'Universal'
-                ? 'bg-slate-700 text-amber-300 shadow-md scale-105 border border-amber-500/40'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-            }`}
-          >
-            Universal / Multimarca
-          </button>
         </div>
 
       </div>
