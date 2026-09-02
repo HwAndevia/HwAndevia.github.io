@@ -402,5 +402,23 @@
     "stockOriginal": 3,
     "stockOEM": 3,
     "stockAlt": 0
+  },
+  {
+    "name": "LLANTA STREET MILER",
+    "brand": "TVS",
+    "category": "Llanta",
+    "modelCompatibility": "4.00 X 8 pulg",
+    "sku": "80005003",
+    "imageUrl": "/imagenes/repuesto_1788346172.webp",
+    "costoOriginal": 84.48,
+    "costoAlt": 0.0,
+    "priceOriginal": 105.0,
+    "priceOEM": 105.0,
+    "priceAlt": 0.0,
+    "priceMayorOEM": 102.0,
+    "priceMayorAlt": 0.0,
+    "stockOriginal": 10,
+    "stockOEM": 10,
+    "stockAlt": 0
   }
 ]
