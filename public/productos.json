@@ -204,5 +204,23 @@
     "stockOriginal": 6,
     "stockOEM": 6,
     "stockAlt": 0
+  },
+  {
+    "name": "COPA DE PALIER LADO RUEDA",
+    "brand": "Bajaj",
+    "category": "Transmision",
+    "modelCompatibility": "RUEDA RE 4T LPG",
+    "sku": "AY141202",
+    "imageUrl": "/imagenes/repuesto_1788344154.webp",
+    "costoOriginal": 22.5,
+    "costoAlt": 0.0,
+    "priceOriginal": 32.0,
+    "priceOEM": 32.0,
+    "priceAlt": 0.0,
+    "priceMayorOEM": 30.0,
+    "priceMayorAlt": 0.0,
+    "stockOriginal": 6,
+    "stockOEM": 6,
+    "stockAlt": 0
   }
 ]
