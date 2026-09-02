@@ -11,7 +11,7 @@ export default defineConfig(() => {
       react(), 
       tailwindcss(),
       sitemap({
-        hostname: 'https://hwandevia.github.io',
+        hostname: 'https://hwandevia.github.io/',
         generateRobotsTxt: true, 
         exclude: ['/google9b04b0605aa2d077', '/standalone_'], 
       })
