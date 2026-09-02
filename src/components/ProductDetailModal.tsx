@@ -325,10 +325,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
                 {product.name}
               </h1>
-
-              <p className="text-sm text-slate-600 leading-relaxed pt-1">
-                {product.description}
-              </p>
             </div>
 
             {/* SELECTOR DE MODALIDAD: POR MENOR vs POR MAYOR */}

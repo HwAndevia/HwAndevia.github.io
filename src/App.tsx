@@ -155,7 +155,6 @@ export default function App() {
           p.brand || '',
           p.category || '',
           p.modelCompatibility || '',
-          p.description || '',
           p.brandAltName || '',
           p.sku || '',
           p.skuOriginal || '',

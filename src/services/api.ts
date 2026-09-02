@@ -54,7 +54,6 @@ export const fetchProducts = async (): Promise<Product[]> => {
               brand: p.brand || 'Universal',
               modelCompatibility: String(p.modelCompatibility || 'TVS King / Torito Bajaj'),
               category: String(p.category || 'General'),
-              description: String(p.description || `Repuesto para mototaxi ${p.brand || ''} ${p.modelCompatibility || ''}.`),
               imageUrl: String(p.imageUrl || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600'),
               priceOriginal: priceOrig,
               priceOEM: priceOrig,

@@ -12,7 +12,7 @@ export interface Product {
   brand: ProductBrand;
   modelCompatibility: string; // e.g., "TVS King Deluxe / Duramax 200", "Torito Bajaj 2T / 4T / FL"
   category: ProductCategory;
-  description: string;
+  description?: string;
   imageUrl: string;
   
   // Single SKU - strictly only one SKU
