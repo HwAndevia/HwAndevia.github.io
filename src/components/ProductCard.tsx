@@ -71,7 +71,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div>
           {/* Category & Compatibility */}
           <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
-            <span className="font-normal text-red-600 uppercase tracking-wider text-[13px]">
+            <span className="font-normal text-red-600 uppercase tracking-wider text-[11px]">
               {product.category}
             </span>
             {singleModel && (
@@ -84,7 +84,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {/* Title */}
           <h3
             onClick={() => onOpenDetail(product, selectedQuality)}
-            className="font-normal text-slate-900 text-base leading-snug line-clamp-2 hover:text-red-600 cursor-pointer transition-colors"
+            className="font-semibold text-slate-900 text-base leading-snug line-clamp-2 hover:text-red-600 cursor-pointer transition-colors"
             title={product.name}
           >
             {product.name}
@@ -92,7 +92,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* QUALITY SELECTOR (Original vs Alternative) - Estilo ProductDetailModal */}
-        <div className="pt-1">
+        <div className="pt-0.2">
           <div className="grid grid-cols-2 gap-2">
             {/* Original Option */}
             <button
@@ -145,7 +145,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Price & Primary Comprar Button */}
-        <div className="pt-3 flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
+        <div className="flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
           <div>
             <span className="text-[12px] text-slate-500 block font-normal leading-none">
               Precio ({selectedQuality})
