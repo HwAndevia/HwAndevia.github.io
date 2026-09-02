@@ -15,8 +15,7 @@
     "stockAlt": 25,
     "sku": "TVS-2001",
     "imageUrl": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "TVS King 200, TVS Deluxe 200cc",
-    "description": "Kit cilindro, pistón, anillos y perno de alta compresión y durabilidad para motor TVS 200."
+    "modelCompatibility": "TVS King 200, TVS Deluxe 200cc"
   },
   {
     "id": "p-2",
@@ -34,8 +33,7 @@
     "stockAlt": 40,
     "sku": "BAJ-1020",
     "imageUrl": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "Bajaj Torito RE 205, RE 4S",
-    "description": "Pistón maquinado de precisión con juego de anillos estándar para mototaxi Torito Bajaj."
+    "modelCompatibility": "Bajaj Torito RE 205, RE 4S"
   },
   {
     "id": "p-3",
@@ -53,8 +51,7 @@
     "stockAlt": 50,
     "sku": "TVS-3040",
     "imageUrl": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "TVS King GS, TVS Duramax",
-    "description": "Discos de embrague fabricados en fibra de alta fricción resistentes al desgaste continuo."
+    "modelCompatibility": "TVS King GS, TVS Duramax"
   },
   {
     "id": "p-4",
@@ -72,8 +69,7 @@
     "stockAlt": 15,
     "sku": "BAJ-4015",
     "imageUrl": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "Bajaj RE 205 2T / 4T, Maxima Z",
-    "description": "Carburador afinado para óptimo rendimiento de combustible y arranque en frío suave."
+    "modelCompatibility": "Bajaj RE 205 2T / 4T, Maxima Z"
   },
   {
     "id": "p-5",
@@ -91,8 +87,7 @@
     "stockAlt": 30,
     "sku": "UNI-5080",
     "imageUrl": "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "TVS King, Bajaj Torito, Zongshen",
-    "description": "Faro delantero con foco halógeno de alto alcance y carcasa reforzada contra vibraciones."
+    "modelCompatibility": "TVS King, Bajaj Torito, Zongshen"
   },
   {
     "id": "p-6",
@@ -110,7 +105,6 @@
     "stockAlt": 60,
     "sku": "BAJ-6090",
     "imageUrl": "https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?auto=format&fit=crop&q=80&w=600",
-    "modelCompatibility": "Bajaj RE 205, RE 4S, Maxima Cargo",
-    "description": "Juego de zapatas con compuesto cerámico libre de asbesto para frenado seguro y silencioso."
+    "modelCompatibility": "Bajaj RE 205, RE 4S, Maxima Cargo"
   }
 ]
