@@ -28,11 +28,17 @@ try:
         generar_excel_predisenado_plantilla,
         leer_excel_productos,
         generar_catalogo_pdf,
-        _normalizar_producto
+        _normalizar_producto,
+        buscar_productos_tokenizado,
+        tokenizar_texto,
+        normalizar_texto_busqueda
     )
     REPORTES_DISPONIBLE = True
 except ImportError:
     REPORTES_DISPONIBLE = False
+
+    def buscar_productos_tokenizado(prods, q):
+        return [dict(p, _idx_original=i, _score_busqueda=1.0) for i, p in enumerate(prods)]
 
 if CTK_DISPONIBLE:
     ctk.set_appearance_mode("System")
@@ -327,12 +333,14 @@ class HWAndeviaAdminApp(BaseClass):
         """Crea el panel derecho para visualizar y gestionar los repuestos del catálogo."""
         self.panel_right = ctk.CTkFrame(self, corner_radius=15)
         self.panel_right.grid(row=0, column=1, padx=(0, 15), pady=15, sticky="nsew")
-        self.panel_right.grid_rowconfigure(1, weight=1)
+        self.panel_right.grid_rowconfigure(0, weight=0)
+        self.panel_right.grid_rowconfigure(1, weight=0)
+        self.panel_right.grid_rowconfigure(2, weight=1)
         self.panel_right.grid_columnconfigure(0, weight=1)
 
         # Cabecera superior con título y botones Deshacer / Rehacer
         header_frame = ctk.CTkFrame(self.panel_right, fg_color="transparent")
-        header_frame.grid(row=0, column=0, padx=15, pady=15, sticky="ew")
+        header_frame.grid(row=0, column=0, padx=15, pady=(12, 4), sticky="ew")
 
         lbl_cat = ctk.CTkLabel(
             header_frame,
@@ -371,14 +379,60 @@ class HWAndeviaAdminApp(BaseClass):
         )
         self.btn_descargar_plantilla_hdr.pack(side="right", padx=5)
 
-        # Lista scrolleable de repuestos
+        # Barra de Búsqueda Tokenizada (Exclusiva de Python)
+        search_frame = ctk.CTkFrame(self.panel_right, corner_radius=8, fg_color=("#F1F5F9", "#1E293B"))
+        search_frame.grid(row=1, column=0, padx=15, pady=(0, 4), sticky="ew")
+        search_frame.grid_columnconfigure(0, weight=1)
+
+        search_input_frame = ctk.CTkFrame(search_frame, fg_color="transparent")
+        search_input_frame.pack(fill="x", padx=8, pady=(5, 3))
+
+        self.entry_busqueda = ctk.CTkEntry(
+            search_input_frame,
+            placeholder_text="🔍 Buscador tokenizado: escribe palabras clave (ej: piston tvs 200, embrague bajaj, sku)...",
+            height=32,
+            font=ctk.CTkFont(size=12)
+        )
+        self.entry_busqueda.pack(side="left", fill="x", expand=True, padx=(0, 6))
+        self.entry_busqueda.bind("<KeyRelease>", lambda event: self.al_cambiar_busqueda())
+
+        self.btn_limpiar_busqueda = ctk.CTkButton(
+            search_input_frame,
+            text="✖ Limpiar",
+            width=80,
+            height=32,
+            fg_color="#64748B",
+            hover_color="#475569",
+            command=self.limpiar_busqueda
+        )
+        self.btn_limpiar_busqueda.pack(side="right")
+
+        self.lbl_info_busqueda = ctk.CTkLabel(
+            search_frame,
+            text="",
+            font=ctk.CTkFont(size=11, weight="bold"),
+            text_color="#0D9488"
+        )
+        self.lbl_info_busqueda.pack(anchor="w", padx=10, pady=(0, 4))
+
+        # Lista scrolleable de repuestos ocupando todo el espacio vertical hacia abajo
         self.scroll_list = ctk.CTkScrollableFrame(self.panel_right)
-        self.scroll_list.grid(row=1, column=0, padx=15, pady=(0, 15), sticky="nsew")
+        self.scroll_list.grid(row=2, column=0, padx=15, pady=(0, 12), sticky="nsew")
 
         self.actualizar_lista_ui()
 
+    def al_cambiar_busqueda(self):
+        """Manejador al teclear en el buscador tokenizado."""
+        self.actualizar_lista_ui()
+
+    def limpiar_busqueda(self):
+        """Limpia el campo de búsqueda y refresca la lista completa."""
+        if hasattr(self, "entry_busqueda"):
+            self.entry_busqueda.delete(0, "end")
+        self.actualizar_lista_ui()
+
     def actualizar_lista_ui(self):
-        """Refresca la vista de la lista de productos en pantalla."""
+        """Refresca la vista de la lista de productos en pantalla aplicando el buscador tokenizado."""
         if hasattr(self, "btn_undo"):
             undo_count = len(self.historial_deshacer)
             redo_count = len(self.historial_rehacer)
@@ -397,6 +451,11 @@ class HWAndeviaAdminApp(BaseClass):
             child.destroy()
 
         if not self.productos:
+            if hasattr(self, "lbl_info_busqueda"):
+                self.lbl_info_busqueda.configure(
+                    text="📋 Catálogo vacío (0 repuestos)",
+                    text_color="gray"
+                )
             lbl_vacio = ctk.CTkLabel(
                 self.scroll_list,
                 text="No hay productos guardados en public/productos.json.",
@@ -405,7 +464,69 @@ class HWAndeviaAdminApp(BaseClass):
             lbl_vacio.pack(pady=20)
             return
 
-        for idx, p in enumerate(self.productos):
+        consulta = ""
+        if hasattr(self, "entry_busqueda"):
+            consulta = self.entry_busqueda.get().strip()
+
+        # Filtrar y ordenar usando el buscador tokenizado
+        if consulta:
+            productos_visibles = buscar_productos_tokenizado(self.productos, consulta)
+        else:
+            productos_visibles = []
+            for idx, p in enumerate(self.productos):
+                p_copy = dict(p)
+                p_copy["_idx_original"] = idx
+                p_copy["_score_busqueda"] = 1.0
+                productos_visibles.append(p_copy)
+
+        # Actualizar badge o etiqueta de conteo
+        total_prods = len(self.productos)
+        total_coincidencias = len(productos_visibles)
+
+        if hasattr(self, "lbl_info_busqueda"):
+            if consulta:
+                if total_coincidencias > 0:
+                    self.lbl_info_busqueda.configure(
+                        text=f"🎯 {total_coincidencias} de {total_prods} repuestos coinciden con '{consulta}' (ordenados por relevancia)",
+                        text_color="#0D9488"
+                    )
+                else:
+                    self.lbl_info_busqueda.configure(
+                        text=f"⚠️ 0 de {total_prods} repuestos coinciden con '{consulta}'",
+                        text_color="#EF4444"
+                    )
+            else:
+                self.lbl_info_busqueda.configure(
+                    text=f"📋 Total: {total_prods} repuestos en catálogo | Búsqueda tokenizada en tiempo real",
+                    text_color="#64748B"
+                )
+
+        if not productos_visibles:
+            lbl_sin_resultados = ctk.CTkLabel(
+                self.scroll_list,
+                text=f"🔍 No se encontraron repuestos que coincidan con '{consulta}'.\n\n"
+                     f"Consejo: Prueba buscando por cilindrada ('200'), marca ('TVS', 'Bajaj'),\n"
+                     f"sistema ('embrague', 'freno', 'piston') o código SKU.",
+                text_color="gray",
+                font=ctk.CTkFont(size=13),
+                justify="center"
+            )
+            lbl_sin_resultados.pack(pady=30)
+
+            btn_restaurar = ctk.CTkButton(
+                self.scroll_list,
+                text="Ver todos los repuestos",
+                width=200,
+                fg_color="#0D9488",
+                hover_color="#0F766E",
+                command=self.limpiar_busqueda
+            )
+            btn_restaurar.pack(pady=10)
+            return
+
+        for p in productos_visibles:
+            real_idx = p.get("_idx_original", 0)
+
             card = ctk.CTkFrame(self.scroll_list, corner_radius=10)
             card.pack(padx=5, pady=5, fill="x", expand=True)
 
@@ -415,7 +536,7 @@ class HWAndeviaAdminApp(BaseClass):
                 width=80,
                 fg_color="#EF4444",
                 hover_color="#DC2626",
-                command=lambda i=idx: self.eliminar_producto(i)
+                command=lambda i=real_idx: self.eliminar_producto(i)
             )
             btn_del.pack(side="right", padx=(5, 15), pady=10)
 
@@ -425,7 +546,7 @@ class HWAndeviaAdminApp(BaseClass):
                 width=80,
                 fg_color="#3B82F6",
                 hover_color="#2563EB",
-                command=lambda i=idx: self.editar_producto(i)
+                command=lambda i=real_idx: self.editar_producto(i)
             )
             btn_edit.pack(side="right", padx=(5, 0), pady=10)
 
@@ -440,9 +561,16 @@ class HWAndeviaAdminApp(BaseClass):
             may_oem_txt = f" | May: S/ {pm_oem:.2f}" if pm_oem > 0 else ""
             may_alt_txt = f" | May: S/ {pm_alt:.2f}" if pm_alt > 0 else ""
 
+            score_txt = ""
+            if consulta and "_score_busqueda" in p:
+                score_txt = f"  [Relevancia: {p['_score_busqueda']:.0f}]"
+
+            compat = p.get("modelCompatibility", "")
+            compat_txt = f" | Comp: {compat}" if compat else ""
+
             info_texto = (
-                f"[{p.get('brand', 'TVS')}] {p.get('name', '')}\n"
-                f"{sku_text}Cat: {p.get('category', 'General')}\n"
+                f"[{p.get('brand', 'TVS')}] {p.get('name', '')}{score_txt}\n"
+                f"{sku_text}Cat: {p.get('category', 'General')}{compat_txt}\n"
                 f"OEM (Men: S/ {p_oem:.2f}{may_oem_txt}) • Alt (Men: S/ {p_alt:.2f}{may_alt_txt})"
             )
 
@@ -659,9 +787,16 @@ class HWAndeviaAdminApp(BaseClass):
             messagebox.showinfo(
                 "Plantilla Excel Descargada",
                 f"✅ Archivo Excel prediseñado guardado exitosamente:\n\n{ruta_final}\n\n"
+                "Estructura del Excel:\n"
+                "• Columnas A y B: SKU y Producto/Repuesto.\n"
+                "• Columnas C y D: Precios Original (Menor y Mayor).\n"
+                "• Columna E: Separador.\n"
+                "• Columnas F y G: Precios Alternativa (Mayor y Menor).\n"
+                "• Columna H: Vacía.\n"
+                "• Columna I: 'Costo Inicial' (exclusivo para este Excel prediseñado).\n\n"
                 "¿Cómo editar y añadir repuestos?\n"
                 "1. Abre el archivo en Excel.\n"
-                "2. En la hoja 'Catálogo Prediseñado', edita directamente los precios o nombres.\n"
+                "2. En la hoja 'Catálogo Prediseñado', edita directamente los precios, nombres o costos iniciales.\n"
                 "   (Importante: conserva el código SKU para que el sistema reconozca qué producto actualizar).\n"
                 "3. Para añadir nuevos repuestos, agrega nuevas filas al final con su SKU, nombre y precios.\n"
                 "4. Guarda el archivo con Ctrl+S.\n"
@@ -729,8 +864,8 @@ class HWAndeviaAdminApp(BaseClass):
                             except (ValueError, TypeError):
                                 pass
 
-                    # Actualizar costos si vinieran
-                    for ck in ["costoOriginal", "costoAlt"]:
+                    # Actualizar costos si vinieran (incluye Costo Inicial de col I)
+                    for ck in ["costoOriginal", "costoAlt", "costoInicial", "costo_inicial"]:
                         if ck in item and item[ck] is not None:
                             try:
                                 p_actual[ck] = float(item[ck])
@@ -784,7 +919,7 @@ class HWAndeviaAdminApp(BaseClass):
             return []
         datos_estandarizados = []
         for p in self.productos:
-            costo_orig = float(p.get("costoOriginal", 0) or 0)
+            costo_orig = float(p.get("costoOriginal", 0) or p.get("costoInicial", 0) or p.get("costo_inicial", 0) or 0)
             costo_alt = float(p.get("costoAlt", 0) or 0)
             p_oem = float(p.get("priceOriginal", p.get("priceOEM", 0)) or 0)
             pm_oem = float(p.get("priceMayorOEM", p.get("priceMayorOriginal", 0)) or 0)
@@ -793,12 +928,19 @@ class HWAndeviaAdminApp(BaseClass):
             pm_alt = float(p.get("priceMayorAlt", 0) or 0)
             cant_alt = int(p.get("stockAlt", 10) or 10)
 
+            # Si el costo es 0 pero hay precio, definir un costo inicial por defecto (60% del precio)
+            if costo_orig == 0 and p_oem > 0:
+                costo_orig = round(p_oem * 0.60, 2)
+            if costo_alt == 0 and p_alt > 0:
+                costo_alt = round(p_alt * 0.55, 2)
+
             datos_estandarizados.append({
                 "marca": p.get("brand", "TVS"),
                 "codigo": p.get("sku", "") or "S/C",
                 "descripcion": p.get("name", "Sin descripción"),
                 "categoria": p.get("category", "Motor"),
                 "compatibilidad": p.get("modelCompatibility", "TVS / Bajaj"),
+                "costo_inicial": costo_orig,
                 "costo_inicial_original": costo_orig,
                 "costo_inicial_alt": costo_alt,
                 "costo_original": costo_orig,
@@ -897,7 +1039,7 @@ class HWAndeviaAdminApp(BaseClass):
             messagebox.showerror("Error al Generar Catálogo Excel", f"Ocurrió un error:\n{e}")
 
     def exportar_pdf(self):
-        """Genera y guarda el catálogo en PDF con imágenes, precios al por menor y al por mayor."""
+        """Genera y guarda el catálogo en PDF de forma ultra-rápida y en segundo plano sin congelar la interfaz."""
         if not REPORTES_DISPONIBLE:
             messagebox.showerror("Error", "El módulo 'reportes.py' no está disponible.")
             return
@@ -915,18 +1057,66 @@ class HWAndeviaAdminApp(BaseClass):
         if not ruta_guardar:
             return
 
+        filtro_actual = ""
+        if hasattr(self, "entry_busqueda") and self.entry_busqueda:
+            try:
+                filtro_actual = self.entry_busqueda.get().strip()
+            except Exception:
+                filtro_actual = ""
+
+        texto_original = "📄 Generar Catálogo en PDF"
+        if hasattr(self, "btn_pdf"):
+            self.btn_pdf.configure(text="⏳ Generando PDF ultra-rápido...", state="disabled")
+
+        def tarea_hilo():
+            try:
+                datos = self.obtener_datos_para_reportes()
+                ruta_final = generar_catalogo_pdf(
+                    datos,
+                    ruta_salida=ruta_guardar,
+                    base_dir=self.script_dir,
+                    filtro_busqueda=filtro_actual
+                )
+                self.after(0, lambda: self._al_finalizar_exportar_pdf(ruta_final, None, texto_original))
+            except Exception as e:
+                self.after(0, lambda: self._al_finalizar_exportar_pdf(None, str(e), texto_original))
+
+        import threading
+        hilo = threading.Thread(target=tarea_hilo, daemon=True)
+        hilo.start()
+
+    def _al_finalizar_exportar_pdf(self, ruta_final, error, texto_original):
+        if hasattr(self, "btn_pdf"):
+            self.btn_pdf.configure(text=texto_original, state="normal")
+
+        if error:
+            messagebox.showerror("Error al Generar PDF", f"Ocurrió un error al generar el PDF:\n{error}")
+            return
+
+        abrir = messagebox.askyesno(
+            "Catálogo PDF Generado",
+            f"✅ Catálogo PDF generado a máxima velocidad:\n\n{ruta_final}\n\n"
+            "- Precios al por Menor y al por Mayor diferenciados\n"
+            "- Calidad Original y Calidad Alternativa con imágenes optimizadas\n"
+            "- Renderizado instantáneo de alta resolución\n\n"
+            "¿Deseas abrir el archivo PDF ahora?"
+        )
+        if abrir:
+            self._abrir_archivo_sistema(ruta_final)
+
+    def _abrir_archivo_sistema(self, ruta):
+        """Abre un archivo con la aplicación predeterminada del sistema operativo."""
         try:
-            datos = self.obtener_datos_para_reportes()
-            ruta_final = generar_catalogo_pdf(datos, ruta_salida=ruta_guardar, base_dir=self.script_dir)
-            messagebox.showinfo(
-                "Catálogo PDF Generado",
-                f"✅ Catálogo generado exitosamente:\n\n{ruta_final}\n\n"
-                "- Precios al por Menor y al por Mayor diferenciados\n"
-                "- Calidad Original y Calidad Alternativa\n"
-                "- Imágenes con soporte automático y compatibilidad de mototaxis."
-            )
-        except Exception as e:
-            messagebox.showerror("Error al Generar PDF", f"Ocurrió un error:\n{e}")
+            import platform, subprocess
+            sistema = platform.system()
+            if sistema == "Windows":
+                os.startfile(ruta)
+            elif sistema == "Darwin":
+                subprocess.Popen(["open", ruta])
+            else:
+                subprocess.Popen(["xdg-open", ruta])
+        except Exception:
+            pass
 
     def publicar_git(self):
         """Ejecuta la secuencia completa de guardado, compilación de la web y sincronización a GitHub."""

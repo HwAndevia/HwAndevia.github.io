@@ -5,8 +5,9 @@ dist/
 coverage/
 .DS_Store
 *.log
-admin.pyw
 cloudrun_chat
+admin.pyw
+admin.py
 reportes.py
 
 # --- Variables de entorno (Seguridad: Nunca subas tus contraseñas/llaves) ---
