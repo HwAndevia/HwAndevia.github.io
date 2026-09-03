@@ -25,6 +25,7 @@ try:
     from reportes import (
         generar_excel_productos,
         generar_excel_catalogo_cliente,
+        generar_excel_predisenado_plantilla,
         leer_excel_productos,
         generar_catalogo_pdf,
         _normalizar_producto
@@ -256,10 +257,21 @@ class HWAndeviaAdminApp(BaseClass):
         lbl_sec_exp = ctk.CTkLabel(self.sidebar_frame, text="📊 Importar & Exportar Catálogo", font=ctk.CTkFont(size=14, weight="bold"))
         lbl_sec_exp.pack(padx=15, pady=(0, 6), anchor="w")
 
-        # 1. Botón Importar Excel (Lectura de Excel prediseñado)
+        # 1. Botón Descargar Excel Prediseñado (Para editar o añadir repuestos)
+        self.btn_descargar_plantilla = ctk.CTkButton(
+            self.sidebar_frame,
+            text="⬇️ Descargar Excel Prediseñado",
+            fg_color="#0D9488",
+            hover_color="#0F766E",
+            height=34,
+            command=self.descargar_excel_predisenado
+        )
+        self.btn_descargar_plantilla.pack(padx=15, pady=3, fill="x")
+
+        # 2. Botón Leer Excel Prediseñado (Actualizar y añadir repuestos al catálogo)
         self.btn_importar_excel = ctk.CTkButton(
             self.sidebar_frame,
-            text="📥 Leer Excel Prediseñado (Añadir)",
+            text="📥 Leer Excel Prediseñado",
             fg_color="#8B5CF6",
             hover_color="#7C3AED",
             height=34,
@@ -348,6 +360,16 @@ class HWAndeviaAdminApp(BaseClass):
             command=self.deshacer
         )
         self.btn_undo.pack(side="right", padx=5)
+
+        self.btn_descargar_plantilla_hdr = ctk.CTkButton(
+            header_frame,
+            text="⬇️ Descargar Excel Prediseñado",
+            width=210,
+            fg_color="#0D9488",
+            hover_color="#0F766E",
+            command=self.descargar_excel_predisenado
+        )
+        self.btn_descargar_plantilla_hdr.pack(side="right", padx=5)
 
         # Lista scrolleable de repuestos
         self.scroll_list = ctk.CTkScrollableFrame(self.panel_right)
@@ -613,6 +635,42 @@ class HWAndeviaAdminApp(BaseClass):
             self.guardar_productos()
             self.actualizar_lista_ui()
 
+    def descargar_excel_predisenado(self):
+        """
+        Genera y descarga la plantilla oficial de Excel prediseñado con los productos actuales,
+        permitiendo editar precios, nombres o añadir nuevos repuestos para reimportarlos fácilmente.
+        """
+        if not REPORTES_DISPONIBLE:
+            messagebox.showerror("Error", "El módulo 'reportes.py' o la librería 'openpyxl' no están disponibles.")
+            return
+
+        ruta_guardar = filedialog.asksaveasfilename(
+            title="Guardar Plantilla Excel Prediseñado",
+            initialfile="catalogo_prediseñado.xlsx",
+            defaultextension=".xlsx",
+            filetypes=[("Archivos Excel", "*.xlsx")]
+        )
+        if not ruta_guardar:
+            return
+
+        try:
+            datos = self.obtener_datos_para_reportes()
+            ruta_final = generar_excel_predisenado_plantilla(datos, ruta_salida=ruta_guardar)
+            messagebox.showinfo(
+                "Plantilla Excel Descargada",
+                f"✅ Archivo Excel prediseñado guardado exitosamente:\n\n{ruta_final}\n\n"
+                "¿Cómo editar y añadir repuestos?\n"
+                "1. Abre el archivo en Excel.\n"
+                "2. En la hoja 'Catálogo Prediseñado', edita directamente los precios o nombres.\n"
+                "   (Importante: conserva el código SKU para que el sistema reconozca qué producto actualizar).\n"
+                "3. Para añadir nuevos repuestos, agrega nuevas filas al final con su SKU, nombre y precios.\n"
+                "4. Guarda el archivo con Ctrl+S.\n"
+                "5. Haz clic en '📥 Leer Excel Prediseñado' para actualizar tu catálogo automáticamente.\n"
+                "6. Pulsa '🚀 Sincronizar con GitHub' para subir los cambios a la web."
+            )
+        except Exception as e:
+            messagebox.showerror("Error al Descargar Plantilla", f"Ocurrió un error al generar la plantilla:\n{e}")
+
     def importar_excel(self):
         """Lee un archivo Excel prediseñado y añade/actualiza los productos en el catálogo."""
         if not REPORTES_DISPONIBLE:
@@ -634,14 +692,17 @@ class HWAndeviaAdminApp(BaseClass):
 
             self.registrar_historial()
 
-            # Diccionarios de búsqueda rápida
-            skus_existentes = {p.get("sku", "").strip().upper(): idx for idx, p in enumerate(self.productos) if p.get("sku")}
-            nombres_existentes = {p.get("name", "").strip().upper(): idx for idx, p in enumerate(self.productos) if p.get("name")}
+            # Diccionarios de búsqueda rápida (por SKU y por Nombre)
+            skus_existentes = {str(p.get("sku", "")).strip().upper(): idx for idx, p in enumerate(self.productos) if p.get("sku")}
+            nombres_existentes = {str(p.get("name", "")).strip().upper(): idx for idx, p in enumerate(self.productos) if p.get("name")}
 
             nuevos_cont = 0
             actualizados_cont = 0
 
             for item in productos_importados:
+                # Quitar llaves internas temporales
+                item.pop("_fuente", None)
+
                 item_sku = str(item.get("sku", "")).strip().upper()
                 item_nom = str(item.get("name", "")).strip().upper()
 
@@ -652,27 +713,67 @@ class HWAndeviaAdminApp(BaseClass):
                     idx_existente = nombres_existentes[item_nom]
 
                 if idx_existente is not None:
-                    # Actualizar preservando foto existente si el importado no trae
+                    # Actualizar preservando foto existente si el importado trae una genérica
                     p_actual = self.productos[idx_existente]
-                    for k, v in item.items():
-                        if k == "imageUrl" and p_actual.get("imageUrl") and (not v or "unsplash" in v):
-                            continue
-                        if v is not None and v != "":
-                            p_actual[k] = v
+
+                    if item.get("name"):
+                        p_actual["name"] = item["name"]
+                    if item.get("sku"):
+                        p_actual["sku"] = item["sku"]
+
+                    # Actualizar precios
+                    for pk in ["priceOriginal", "priceOEM", "priceAlt", "priceMayorOEM", "priceMayorOriginal", "priceMayorAlt"]:
+                        if pk in item and item[pk] is not None:
+                            try:
+                                p_actual[pk] = float(item[pk])
+                            except (ValueError, TypeError):
+                                pass
+
+                    # Actualizar costos si vinieran
+                    for ck in ["costoOriginal", "costoAlt"]:
+                        if ck in item and item[ck] is not None:
+                            try:
+                                p_actual[ck] = float(item[ck])
+                            except (ValueError, TypeError):
+                                pass
+
+                    # Marca y categoría
+                    if item.get("brand") and item["brand"] != "TVS / Bajaj":
+                        p_actual["brand"] = item["brand"]
+                    if item.get("category") and item["category"] != "Repuesto":
+                        p_actual["category"] = item["category"]
+                    if item.get("modelCompatibility") and item["modelCompatibility"] != "TVS King 200 / Torito Bajaj RE":
+                        p_actual["modelCompatibility"] = item["modelCompatibility"]
+
+                    # Foto: preservar imagen personalizada existente
+                    if item.get("imageUrl") and ("unsplash" not in item["imageUrl"] or not p_actual.get("imageUrl")):
+                        p_actual["imageUrl"] = item["imageUrl"]
+
                     actualizados_cont += 1
                 else:
+                    # Nuevo repuesto que se añade al catálogo
+                    if not item.get("id"):
+                        nuevo_id = f"p-{item.get('sku', 'new').lower().replace(' ', '-')}-{int(time.time()*1000)%100000}"
+                        item["id"] = nuevo_id
+
                     self.productos.append(item)
+                    if item.get("sku"):
+                        skus_existentes[item.get("sku").strip().upper()] = len(self.productos) - 1
+                    if item.get("name"):
+                        nombres_existentes[item.get("name").strip().upper()] = len(self.productos) - 1
                     nuevos_cont += 1
 
             self.guardar_productos()
             self.actualizar_lista_ui()
 
             messagebox.showinfo(
-                "✅ Importación Exitosa",
-                f"Se leyeron {len(productos_importados)} productos del Excel.\n\n"
-                f"• Nuevos repuestos añadidos: {nuevos_cont}\n"
-                f"• Repuestos actualizados: {actualizados_cont}\n"
-                f"• Total en catálogo actual: {len(self.productos)} repuestos."
+                "✅ Catálogo Actualizado con Éxito",
+                f"Procesamiento del Excel completado:\n\n"
+                f"• Repuestos modificados/actualizados: {actualizados_cont}\n"
+                f"• Nuevos repuestos agregados: {nuevos_cont}\n"
+                f"• Total de repuestos en el catálogo: {len(self.productos)}\n\n"
+                "Los cambios ya están guardados en public/productos.json. "
+                "Para publicarlos en la web, presiona '🚀 Sincronizar con GitHub'."
             )
         except Exception as e:
             messagebox.showerror("Error al Importar Excel", f"Ocurrió un error al leer el archivo:\n{e}")
