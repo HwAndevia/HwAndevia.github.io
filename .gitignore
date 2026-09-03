@@ -5,7 +5,7 @@ dist/
 coverage/
 .DS_Store
 *.log
-admin.py
+admin.pyw
 cloudrun_chat
 reportes.py
 
