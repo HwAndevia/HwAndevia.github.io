@@ -1,7 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ProductBrand } from '../types';
-import { FileText, MessageCircle, X, Download, ExternalLink } from 'lucide-react';
+import { FileText, MessageCircle, X, Download, ExternalLink, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { buildWhatsAppUrl } from '../utils/Whatsapp';
+
+export interface CatalogoPdfItem {
+  id: string;
+  titulo: string;
+  descripcion?: string;
+  archivo: string;
+  url: string;
+}
+
+const DEFAULT_CATALOGOS: CatalogoPdfItem[] = [
+  {
+    id: 'pdf-1',
+    titulo: 'Catálogo 1 • TVS King',
+    descripcion: 'Repuestos TVS King 200 y Deluxe',
+    archivo: 'catalogo_1.pdf',
+    url: '/catalogo_1.pdf',
+  },
+  {
+    id: 'pdf-2',
+    titulo: 'Catálogo 2 • Torito Bajaj',
+    descripcion: 'Repuestos Bajaj RE 4T / Torito',
+    archivo: 'catalogo_2.pdf',
+    url: '/catalogo_2.pdf',
+  },
+  {
+    id: 'pdf-3',
+    titulo: 'Catálogo 3 • Lista General',
+    descripcion: 'Catálogo Consolidado Multimarca',
+    archivo: 'catalogo_3.pdf',
+    url: '/catalogo_3.pdf',
+  },
+];
 
 interface HeroBannerProps {
   selectedBrand: ProductBrand;
@@ -14,9 +46,48 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   onSelectBrand,
 }) => {
   const [showPdfModal, setShowPdfModal] = useState<boolean>(false);
+  const [catalogos, setCatalogos] = useState<CatalogoPdfItem[]>(DEFAULT_CATALOGOS);
+  const [selectedPdfId, setSelectedPdfId] = useState<string>('pdf-1');
+  const scrollBarRef = useRef<HTMLDivElement>(null);
 
   // URL directa de WhatsApp con el mensaje prefijado
   const whatsappUrl = buildWhatsAppUrl('+51 980 722 382', 'Hola, quiero cotizar...');
+
+  // Cargar lista dinámica de catálogos desde /api/catalogos o /catalogos.json
+  useEffect(() => {
+    fetch('/api/catalogos')
+      .then((res) => {
+        if (!res.ok) throw new Error('API not available');
+        return res.json();
+      })
+      .then((data: CatalogoPdfItem[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setCatalogos(data);
+          if (!data.some((c) => c.id === selectedPdfId)) {
+            setSelectedPdfId(data[0].id);
+          }
+        }
+      })
+      .catch(() => {
+        // Fallback a /catalogos.json directamente
+        fetch('/catalogos.json')
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => {
+            if (Array.isArray(data) && data.length > 0) {
+              setCatalogos(data);
+            }
+          })
+          .catch(() => {
+            // Mantener DEFAULT_CATALOGOS
+          });
+      });
+  }, []);
+
+  // PDF actualmente seleccionado
+  const currentPdf =
+    catalogos.find((c) => c.id === selectedPdfId) ||
+    catalogos[0] ||
+    DEFAULT_CATALOGOS[0];
 
   // Manejador de tecla Escape y bloqueo de scroll de fondo para la pantalla completa
   useEffect(() => {
@@ -37,6 +108,14 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       document.body.style.overflow = originalOverflow;
     };
   }, [showPdfModal]);
+
+  // Funciones para deslizar la barra de botones horizontalmente
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (scrollBarRef.current) {
+      const scrollAmount = direction === 'left' ? -220 : 220;
+      scrollBarRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -64,10 +143,10 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                   type="button"
                   onClick={() => setShowPdfModal(true)}
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all duration-200 cursor-pointer"
-                  title="Abrir catálogo completo en PDF a pantalla completa"
+                  title="Abrir catálogos completos en PDF a pantalla completa"
                 >
                   <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />
-                  <span>Ver catalogo en PDF</span>
+                  <span>Ver catalogo en PDF ({catalogos.length})</span>
                 </button>
 
                 {/* Botón Verde WhatsApp: Contactar por Whatsapp */}
@@ -109,7 +188,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           aria-label="Visor de catálogo en PDF"
         >
           {/* Barra superior de control a pantalla completa */}
-          <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-2.5 flex items-center justify-between text-white shrink-0 z-10 shadow-lg">
+          <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-3 sm:px-4 py-2.5 flex items-center justify-between text-white shrink-0 z-20 shadow-lg">
             
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="p-1.5 bg-orange-500/20 text-orange-400 rounded-lg shrink-0">
@@ -117,34 +196,34 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               </div>
               <div className="min-w-0">
                 <h2 className="text-sm sm:text-base font-bold text-white truncate">
-                  Catálogo Oficial de Repuestos • HW-Andevia
+                  {currentPdf.titulo || 'Catálogo de Repuestos • HW-Andevia'}
                 </h2>
-                <p className="text-[11px] text-slate-400 hidden sm:block">
-                  Visualización en pantalla completa
+                <p className="text-[11px] text-slate-400 hidden sm:block truncate">
+                  {currentPdf.descripcion || 'Selecciona un catálogo en la barra superior deslizable'}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               
               {/* Botón Abrir en nueva pestaña */}
               <a
-                href="/catalogo.pdf"
+                href={currentPdf.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 hover:text-white transition-colors"
-                title="Abrir el PDF en una pestaña independiente del navegador"
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 hover:text-white transition-colors"
+                title="Abrir este PDF en una pestaña independiente"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span className="hidden md:inline">Nueva pestaña</span>
               </a>
 
-              {/* Botón Descargar PDF */}
+              {/* Botón Descargar PDF actual */}
               <a
-                href="/catalogo.pdf"
-                download="catalogo_hw_andevia.pdf"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 hover:text-white transition-colors"
-                title="Descargar archivo PDF en tu dispositivo"
+                href={currentPdf.url}
+                download={currentPdf.archivo || 'catalogo_hw_andevia.pdf'}
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 hover:text-white transition-colors"
+                title="Descargar este archivo PDF en tu dispositivo"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span className="hidden md:inline">Descargar</span>
@@ -154,7 +233,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               <button
                 type="button"
                 onClick={() => setShowPdfModal(false)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-xs font-bold text-white transition-colors shadow-sm cursor-pointer ml-1"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-xs font-bold text-white transition-colors shadow-sm cursor-pointer ml-1"
                 title="Cerrar visor a pantalla completa (Escape)"
               >
                 <X className="w-4 h-4" />
@@ -164,12 +243,81 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             </div>
           </div>
 
+          {/* BARRA DESLIZABLE CON BOTONES QUE INDICAN CADA PDF (SOLICITADO) */}
+          <div className="relative bg-slate-900 border-b border-slate-800/80 px-2 sm:px-4 py-2 shrink-0 flex items-center shadow-md">
+            
+            {/* Flecha deslizamiento izquierda (visible si hay varios o en móvil/pantalla angosta) */}
+            <button
+              type="button"
+              onClick={() => scrollTabs('left')}
+              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg shrink-0 transition-colors hidden sm:flex items-center justify-center mr-1"
+              title="Deslizar botones a la izquierda"
+              aria-label="Deslizar izquierda"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            {/* Contenedor deslizable con scroll horizontal suave */}
+            <div
+              ref={scrollBarRef}
+              className="flex-1 flex items-center gap-2 overflow-x-auto scroll-smooth py-1 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {catalogos.map((cat, idx) => {
+                const isActive = cat.id === selectedPdfId;
+                return (
+                  <button
+                    key={cat.id || idx}
+                    type="button"
+                    onClick={() => setSelectedPdfId(cat.id)}
+                    className={`shrink-0 inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer select-none ${
+                      isActive
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/30 ring-2 ring-orange-400/80 scale-[1.02]'
+                        : 'bg-slate-800/90 hover:bg-slate-700/90 text-slate-300 hover:text-white border border-slate-700/80 active:scale-95'
+                    }`}
+                    title={`Ver ${cat.titulo}`}
+                  >
+                    <span
+                      className={`inline-flex items-center justify-center w-5 h-5 rounded-md text-[11px] font-bold ${
+                        isActive
+                          ? 'bg-white/25 text-white'
+                          : 'bg-slate-700 text-orange-400'
+                      }`}
+                    >
+                      {idx + 1}
+                    </span>
+
+                    <span className="whitespace-nowrap font-bold">
+                      {cat.titulo}
+                    </span>
+
+                    {isActive && (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 ml-0.5" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Flecha deslizamiento derecha */}
+            <button
+              type="button"
+              onClick={() => scrollTabs('right')}
+              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg shrink-0 transition-colors hidden sm:flex items-center justify-center ml-1"
+              title="Deslizar botones a la derecha"
+              aria-label="Deslizar derecha"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+
+          </div>
+
           {/* Contenido PDF ocupando el 100% de la pantalla sin márgenes ni recuadros */}
-          <div className="flex-1 w-full h-full relative bg-slate-900">
+          <div className="flex-1 w-full h-full relative bg-slate-950">
             <iframe
-              src="/catalogo.pdf#toolbar=1&navpanes=1&view=FitH"
-              className="w-full h-full border-0 absolute inset-0 bg-slate-900"
-              title="Catálogo de Repuestos HW-Andevia PDF"
+              key={currentPdf.id || currentPdf.url}
+              src={`${currentPdf.url}#toolbar=1&navpanes=1&view=FitH`}
+              className="w-full h-full border-0 absolute inset-0 bg-slate-950"
+              title={currentPdf.titulo || 'Catálogo de Repuestos'}
             />
           </div>
         </div>
