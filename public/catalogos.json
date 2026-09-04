@@ -1,0 +1,23 @@
+[
+  {
+    "id": "pdf-1",
+    "titulo": "BAJAJ",
+    "descripcion": "Repuestos TVS King 200 y Deluxe",
+    "archivo": "catalogo_1.pdf",
+    "url": "/catalogo_1.pdf"
+  },
+  {
+    "id": "pdf-2",
+    "titulo": "TVS",
+    "descripcion": "Repuestos Bajaj RE 4T / Torito",
+    "archivo": "catalogo_2.pdf",
+    "url": "/catalogo_2.pdf"
+  },
+  {
+    "id": "pdf-3",
+    "titulo": "Llantas",
+    "descripcion": "Catálogo Consolidado Multimarca",
+    "archivo": "catalogo_3.pdf",
+    "url": "/catalogo_3.pdf"
+  }
+]
