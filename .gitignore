@@ -9,6 +9,7 @@ cloudrun_chat
 admin.pyw
 admin.py
 reportes.py
+generar_pdf_catalogo.py
 
 # --- Variables de entorno (Seguridad: Nunca subas tus contraseñas/llaves) ---
 .env
