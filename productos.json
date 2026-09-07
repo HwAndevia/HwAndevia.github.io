@@ -12,11 +12,12 @@
     "priceOEM": 14.3,
     "priceAlt": 0.0,
     "priceMayorOEM": 11.0,
+    "priceMayorOriginal": 11.0,
     "priceMayorAlt": 0.0,
     "stockOriginal": 50,
     "stockOEM": 50,
     "stockAlt": 0,
-    "priceMayorOriginal": 11.0,
+    "id": "p-23",
     "costoInicial": 8.89,
     "costo_inicial": 8.89
   },
