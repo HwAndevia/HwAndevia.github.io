@@ -7,7 +7,7 @@ coverage/
 *.log
 cloudrun_chat
 admin.pyw
-admin.py
+controlador.py
 reportes.py
 generar_pdf_catalogo.py
 
