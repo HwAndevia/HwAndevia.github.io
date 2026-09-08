@@ -7,7 +7,7 @@
     "sku": "24151171",
     "imageUrl": "/imagenes/repuesto_1788339992.jpg",
     "costoOriginal": 8.89,
-    "costoAlt": 4.89,
+    "costoAlt": 0.0,
     "priceOriginal": 14.3,
     "priceOEM": 14.3,
     "priceAlt": 0.0,
@@ -19,7 +19,13 @@
     "stockAlt": 0,
     "id": "p-23",
     "costoInicial": 8.89,
-    "costo_inicial": 8.89
+    "costo_inicial": 8.89,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 8.89,
+    "costo_inicial_original": 8.89
   },
   {
     "name": "FILTRO DE ACEITE",
@@ -29,7 +35,7 @@
     "sku": "AA121006",
     "imageUrl": "/imagenes/repuesto_1788339863.jpg",
     "costoOriginal": 1.71,
-    "costoAlt": 0.94,
+    "costoAlt": 0.0,
     "priceOriginal": 4.0,
     "priceOEM": 4.0,
     "priceAlt": 0.0,
@@ -40,7 +46,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 3.0,
     "costoInicial": 1.71,
-    "costo_inicial": 1.71
+    "costo_inicial": 1.71,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 1.71,
+    "costo_inicial_original": 1.71
   },
   {
     "name": "BUJIA",
@@ -50,7 +62,7 @@
     "sku": "AA111154",
     "imageUrl": "/imagenes/repuesto_1788341216.jpg",
     "costoOriginal": 6.35,
-    "costoAlt": 3.49,
+    "costoAlt": 0.0,
     "priceOriginal": 12.5,
     "priceOEM": 12.5,
     "priceAlt": 0.0,
@@ -61,7 +73,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 7.5,
     "costoInicial": 6.35,
-    "costo_inicial": 6.35
+    "costo_inicial": 6.35,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 6.35,
+    "costo_inicial_original": 6.35
   },
   {
     "name": "RODAJE DE BOCAMAZA 6204",
@@ -71,7 +89,7 @@
     "sku": "01100342",
     "imageUrl": "/imagenes/repuesto_1788341464.jpg",
     "costoOriginal": 8.26,
-    "costoAlt": 4.54,
+    "costoAlt": 0.0,
     "priceOriginal": 13.5,
     "priceOEM": 13.5,
     "priceAlt": 0.0,
@@ -82,7 +100,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 12.6,
     "costoInicial": 8.26,
-    "costo_inicial": 8.26
+    "costo_inicial": 8.26,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 8.26,
+    "costo_inicial_original": 8.26
   },
   {
     "name": "RODAJE D/EJE DELANTERO",
@@ -92,7 +116,7 @@
     "sku": "01101009",
     "imageUrl": "/imagenes/repuesto_1788341750.jpg",
     "costoOriginal": 8.58,
-    "costoAlt": 4.72,
+    "costoAlt": 0.0,
     "priceOriginal": 15.0,
     "priceOEM": 15.0,
     "priceAlt": 0.0,
@@ -103,7 +127,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 13.0,
     "costoInicial": 8.58,
-    "costo_inicial": 8.58
+    "costo_inicial": 8.58,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 8.58,
+    "costo_inicial_original": 8.58
   },
   {
     "name": "KIT DE EMPAQUETADURA",
@@ -113,7 +143,7 @@
     "sku": "36AA1003",
     "imageUrl": "/imagenes/repuesto_1788342511.webp",
     "costoOriginal": 15.89,
-    "costoAlt": 8.74,
+    "costoAlt": 0.0,
     "priceOriginal": 31.8,
     "priceOEM": 31.8,
     "priceAlt": 0.0,
@@ -124,7 +154,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 28.0,
     "costoInicial": 15.89,
-    "costo_inicial": 15.89
+    "costo_inicial": 15.89,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 15.89,
+    "costo_inicial_original": 15.89
   },
   {
     "name": "CABLE Y FUNDA DE ACELERADOR",
@@ -134,7 +170,7 @@
     "sku": "AA191073",
     "imageUrl": "/imagenes/repuesto_1788342866.jpg",
     "costoOriginal": 10.17,
-    "costoAlt": 5.59,
+    "costoAlt": 0.0,
     "priceOriginal": 17.5,
     "priceOEM": 17.5,
     "priceAlt": 0.0,
@@ -145,7 +181,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 14.0,
     "costoInicial": 10.17,
-    "costo_inicial": 10.17
+    "costo_inicial": 10.17,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 10.17,
+    "costo_inicial_original": 10.17
   },
   {
     "name": "CABLE Y FUNDA DE EMBRAGUE",
@@ -173,7 +215,7 @@
     "sku": "AA191092",
     "imageUrl": "/imagenes/repuesto_1788343311.jpg",
     "costoOriginal": 13.35,
-    "costoAlt": 7.34,
+    "costoAlt": 0.0,
     "priceOriginal": 22.0,
     "priceOEM": 22.0,
     "priceAlt": 0.0,
@@ -184,7 +226,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 18.5,
     "costoInicial": 13.35,
-    "costo_inicial": 13.35
+    "costo_inicial": 13.35,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 13.35,
+    "costo_inicial_original": 13.35
   },
   {
     "name": "KIT DE DADOS DE PALIER",
@@ -194,7 +242,7 @@
     "sku": "36BA4042",
     "imageUrl": "/imagenes/repuesto_1788343635.webp",
     "costoOriginal": 6.03,
-    "costoAlt": 3.32,
+    "costoAlt": 0.0,
     "priceOriginal": 17.0,
     "priceOEM": 17.0,
     "priceAlt": 0.0,
@@ -205,7 +253,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 12.0,
     "costoInicial": 6.03,
-    "costo_inicial": 6.03
+    "costo_inicial": 6.03,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 6.03,
+    "costo_inicial_original": 6.03
   },
   {
     "name": "KIT DE DADOS DE PALIER CON PIN",
@@ -215,7 +269,7 @@
     "sku": "36BA4043",
     "imageUrl": "/imagenes/repuesto_1788343956.png",
     "costoOriginal": 11.88,
-    "costoAlt": 6.53,
+    "costoAlt": 0.0,
     "priceOriginal": 26.0,
     "priceOEM": 26.0,
     "priceAlt": 0.0,
@@ -226,7 +280,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 18.5,
     "costoInicial": 11.88,
-    "costo_inicial": 11.88
+    "costo_inicial": 11.88,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 11.88,
+    "costo_inicial_original": 11.88
   },
   {
     "name": "COPA DE PALIER LADO RUEDA",
@@ -236,7 +296,7 @@
     "sku": "AY141202",
     "imageUrl": "/imagenes/repuesto_1788344154.webp",
     "costoOriginal": 19.06,
-    "costoAlt": 10.48,
+    "costoAlt": 0.0,
     "priceOriginal": 35.0,
     "priceOEM": 35.0,
     "priceAlt": 0.0,
@@ -247,7 +307,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 31.0,
     "costoInicial": 19.06,
-    "costo_inicial": 19.06
+    "costo_inicial": 19.06,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 19.06,
+    "costo_inicial_original": 19.06
   },
   {
     "name": "KIT DE ZAPATAS DE FRENO",
@@ -257,7 +323,7 @@
     "sku": "G4321840",
     "imageUrl": "/imagenes/repuesto_1788344434.jpg",
     "costoOriginal": 11.37,
-    "costoAlt": 6.25,
+    "costoAlt": 0.0,
     "priceOriginal": 18.5,
     "priceOEM": 18.5,
     "priceAlt": 0.0,
@@ -268,7 +334,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 15.0,
     "costoInicial": 11.37,
-    "costo_inicial": 11.37
+    "costo_inicial": 11.37,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 11.37,
+    "costo_inicial_original": 11.37
   },
   {
     "name": "FILTRO DE ACEITE",
@@ -278,7 +350,7 @@
     "sku": "G4080260",
     "imageUrl": "/imagenes/repuesto_1788344581.jpg",
     "costoOriginal": 1.03,
-    "costoAlt": 0.57,
+    "costoAlt": 0.0,
     "priceOriginal": 4.8,
     "priceOEM": 4.8,
     "priceAlt": 0.0,
@@ -289,7 +361,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 4.0,
     "costoInicial": 1.03,
-    "costo_inicial": 1.03
+    "costo_inicial": 1.03,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 1.03,
+    "costo_inicial_original": 1.03
   },
   {
     "name": "BUJIA - UR6DE",
@@ -299,7 +377,7 @@
     "sku": "G4011310",
     "imageUrl": "/imagenes/repuesto_1788344718.jpg",
     "costoOriginal": 5.72,
-    "costoAlt": 3.15,
+    "costoAlt": 0.0,
     "priceOriginal": 11.0,
     "priceOEM": 11.0,
     "priceAlt": 0.0,
@@ -310,7 +388,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 8.0,
     "costoInicial": 5.72,
-    "costo_inicial": 5.72
+    "costo_inicial": 5.72,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 5.72,
+    "costo_inicial_original": 5.72
   },
   {
     "name": "CABLE Y FUNDA DE EMBRAGUE",
@@ -320,7 +404,7 @@
     "sku": "G4070730",
     "imageUrl": "/imagenes/repuesto_1788344928.jpg",
     "costoOriginal": 15.25,
-    "costoAlt": 8.39,
+    "costoAlt": 0.0,
     "priceOriginal": 27.0,
     "priceOEM": 27.0,
     "priceAlt": 0.0,
@@ -331,7 +415,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 24.0,
     "costoInicial": 15.25,
-    "costo_inicial": 15.25
+    "costo_inicial": 15.25,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 15.25,
+    "costo_inicial_original": 15.25
   },
   {
     "name": "COPA DE PALIER LADO RUEDA",
@@ -341,7 +431,7 @@
     "sku": "G2080080",
     "imageUrl": "/imagenes/repuesto_1788345119.jpg",
     "costoOriginal": 28.61,
-    "costoAlt": 15.74,
+    "costoAlt": 0.0,
     "priceOriginal": 49.0,
     "priceOEM": 49.0,
     "priceAlt": 0.0,
@@ -352,7 +442,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 44.0,
     "costoInicial": 28.61,
-    "costo_inicial": 28.61
+    "costo_inicial": 28.61,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 28.61,
+    "costo_inicial_original": 28.61
   },
   {
     "name": "PISO DE JEBE LADO PASAJERO",
@@ -362,7 +458,7 @@
     "sku": "G5300190",
     "imageUrl": "/imagenes/repuesto_1788345310.jpg",
     "costoOriginal": 31.14,
-    "costoAlt": 17.13,
+    "costoAlt": 0.0,
     "priceOriginal": 43.0,
     "priceOEM": 43.0,
     "priceAlt": 0.0,
@@ -373,7 +469,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 36.0,
     "costoInicial": 31.14,
-    "costo_inicial": 31.14
+    "costo_inicial": 31.14,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 31.14,
+    "costo_inicial_original": 31.14
   },
   {
     "name": "GUARDAFANGO DELANTERO - NEGRO",
@@ -383,7 +485,7 @@
     "sku": "G42210903D",
     "imageUrl": "/imagenes/repuesto_1788345529.jpg",
     "costoOriginal": 60.38,
-    "costoAlt": 33.21,
+    "costoAlt": 0.0,
     "priceOriginal": 92.0,
     "priceOEM": 92.0,
     "priceAlt": 0.0,
@@ -394,7 +496,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 75.0,
     "costoInicial": 60.38,
-    "costo_inicial": 60.38
+    "costo_inicial": 60.38,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 60.38,
+    "costo_inicial_original": 60.38
   },
   {
     "name": "EMPAQUETADURA DE CILINDRO",
@@ -404,7 +512,7 @@
     "sku": "G4010070",
     "imageUrl": "/imagenes/repuesto_1788345618.png",
     "costoOriginal": 2.85,
-    "costoAlt": 1.57,
+    "costoAlt": 0.0,
     "priceOriginal": 8.0,
     "priceOEM": 8.0,
     "priceAlt": 0.0,
@@ -415,7 +523,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 5.5,
     "costoInicial": 2.85,
-    "costo_inicial": 2.85
+    "costo_inicial": 2.85,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 2.85,
+    "costo_inicial_original": 2.85
   },
   {
     "name": "KIT MAYOR DE EMPAQUE/MOTOR",
@@ -425,7 +539,7 @@
     "sku": "G4322790",
     "imageUrl": "/imagenes/repuesto_1788345684.png",
     "costoOriginal": 15.89,
-    "costoAlt": 8.74,
+    "costoAlt": 0.0,
     "priceOriginal": 34.0,
     "priceOEM": 34.0,
     "priceAlt": 0.0,
@@ -436,7 +550,13 @@
     "stockAlt": 0,
     "priceMayorOriginal": 25.0,
     "costoInicial": 15.89,
-    "costo_inicial": 15.89
+    "costo_inicial": 15.89,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 15.89,
+    "costo_inicial_original": 15.89
   },
   {
     "name": "LLANTA STREET MILER",
@@ -446,7 +566,7 @@
     "sku": "80005003",
     "imageUrl": "/imagenes/repuesto_1788346172.webp",
     "costoOriginal": 71.6,
-    "costoAlt": 39.38,
+    "costoAlt": 0.0,
     "priceOriginal": 94.0,
     "priceOEM": 94.0,
     "priceAlt": 0.0,
@@ -457,6 +577,12 @@
     "stockAlt": 0,
     "priceMayorOriginal": 80.0,
     "costoInicial": 71.6,
-    "costo_inicial": 71.6
+    "costo_inicial": 71.6,
+    "costo_alt": 0.0,
+    "costoAlternativo": 0.0,
+    "costo_alternativo": 0.0,
+    "costo_inicial_alt": 0.0,
+    "costo_original": 71.6,
+    "costo_inicial_original": 71.6
   }
 ]
