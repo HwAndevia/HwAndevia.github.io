@@ -1,7 +1,6 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import sitemap from 'vite-plugin-sitemap';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
@@ -9,12 +8,7 @@ export default defineConfig(() => {
     base: '/',
     plugins: [
       react(), 
-      tailwindcss(),
-      sitemap({
-        hostname: 'https://hwandevia.github.io/',
-        generateRobotsTxt: true, 
-        exclude: ['/google9b04b0605aa2d077', '/standalone_'], 
-      })
+      tailwindcss()
     ],
     resolve: {
       alias: {
